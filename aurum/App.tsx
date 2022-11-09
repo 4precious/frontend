@@ -9,12 +9,12 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-      <NavigationContainer
-        documentTitle={{
-          enabled: false,
-        }}
-      >
-        <Stack.Navigator>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
           <Stack.Screen
             name="Root"
             component={Root}

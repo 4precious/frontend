@@ -1,11 +1,11 @@
-import { View, Text } from 'react-native'
+import { SafeAreaView, Text, View } from 'react-native'
 import React from 'react'
 
 const QuestionPage = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>QuestionPage</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 

@@ -23,12 +23,10 @@ export default MainCard
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexGrow: 1,
-    backgroundColor: '#ccc',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 20,
+    backgroundColor: '#dfdfdf',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    padding: 16,
     borderRadius: 20,
-    marginVertical: 30,
   },
 })
