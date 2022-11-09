@@ -1,12 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import Root from './src';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import QuestionPage from './src/pages/Question';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <NavigationContainer
+        documentTitle={{
+          enabled: false,
+        }}
+      >
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Root"
+            component={Root}
+          />
+          <Stack.Screen
+            name="Question"
+            component={QuestionPage}
+          />
+        </Stack.Navigator>
+        <StatusBar style="auto" />
+      </NavigationContainer>
   );
 }
 
