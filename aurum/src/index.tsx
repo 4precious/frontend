@@ -2,6 +2,7 @@ import { StyleSheet, SafeAreaView, Text, Button, View, Pressable } from 'react-n
 import React from 'react'
 import MainCard from './components/MainCard'
 import { Calendar, User } from 'react-native-feather';
+import getTodayInString from './utils/getTodayInString';
 
 const Root = (props: any) => {
   return (
@@ -138,14 +139,3 @@ const styles = StyleSheet.create({
   }
 })
 
-const getTodayInString = () => {
-  // get today in Month Date like NOV 12
-  const today = new Date()
-  // get month in string like NOV, DEC
-  const month = today.toLocaleString('en-US', { month: 'short' })
-  const date = today.getDate()
-  return {
-    month: month,
-    date: date,
-  }
-}
