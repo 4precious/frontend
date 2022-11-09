@@ -1,4 +1,4 @@
-import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View, Alert } from 'react-native'
 import { useState } from 'react'
 import { ChevronLeft, Edit } from 'react-native-feather'
 import getTodayInString from '../../utils/getTodayInString'
@@ -7,6 +7,25 @@ import getTodayInString from '../../utils/getTodayInString'
 const QuestionPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
   const [question, setQuestion] = useState('')
+
+  const submit = () => {
+    if (question === '') {
+      Alert.alert('Please type a question')
+      return
+    }
+    Alert.alert("질문 작성을 마칠까요?", "질문이 아이에게 전송됩니다.", [
+      {
+        text: "취소",
+        style: "cancel"
+      },
+      {
+        text: "확인",
+        onPress: () => {
+          navigation.navigate('Root')
+        }
+      }
+    ])
+  }
 
   return (
     <SafeAreaView
@@ -62,7 +81,7 @@ const QuestionPage = ({ navigation }: any) => {
             justifyContent: 'center',
             height: 60,
             borderRadius: 10,
-            marginVertical: 36,
+            marginTop: 36,
           }}
         >
           {
@@ -103,7 +122,30 @@ const QuestionPage = ({ navigation }: any) => {
             )
           }
         </Pressable>
-        
+        {
+          question.length > 0 &&
+          <Pressable
+            onPress={() => {
+              submit()
+            }}
+            style={{
+              backgroundColor: '#FFC226',
+              justifyContent: 'center',
+              height: 60,
+              borderRadius: 10,
+              marginTop: 16,
+              alignItems: 'center',
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+              }}
+            >
+              작성 완료
+            </Text>
+          </Pressable>
+        }
       </View>
     </SafeAreaView>
   )
