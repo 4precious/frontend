@@ -1,7 +1,5 @@
-import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View, Alert, Keyboard } from 'react-native'
+import { SafeAreaView, StyleSheet, View, Alert, Keyboard } from 'react-native'
 import { useState } from 'react'
-import { ChevronLeft, Edit } from 'react-native-feather'
-import getTodayInString from '../../utils/getTodayInString'
 import Header from './Header'
 import DateDisplay from './DateDisplay'
 import PrimaryButton from './PrimaryButton'
@@ -9,7 +7,6 @@ import AnswerDisplay from './AnswerDisplay'
 import SentimentalAnalysisResulltDisplay from './SentimentalAnalysisResulltDisplay'
 import SolutionDisplay from './SolutionDisplay'
 import QuestionDisplay from './QuestionDisplay'
-
 
 const QuestionPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
