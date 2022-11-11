@@ -5,7 +5,7 @@ const SentimentalAnalysisResulltDisplay = () => {
   return (
     <View
       style={{
-        marginVertical: 24,
+        marginVertical: 16,
         marginHorizontal: 36,
       }}
     >

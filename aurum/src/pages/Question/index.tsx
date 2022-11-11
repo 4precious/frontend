@@ -1,11 +1,11 @@
-import { SafeAreaView, StyleSheet, View, Alert, Keyboard } from 'react-native'
-import { useState } from 'react'
-import Header from './Header'
+import { SafeAreaView, StyleSheet, View, Text, Alert, Keyboard, Pressable, ScrollView } from 'react-native'
+import React, { useState } from 'react'
+import Header from '../../components/Header'
 import DateDisplay from './DateDisplay'
 import PrimaryButton from './PrimaryButton'
 import AnswerDisplay from './AnswerDisplay'
 import SentimentalAnalysisResulltDisplay from './SentimentalAnalysisResulltDisplay'
-import SolutionDisplay from './SolutionDisplay'
+import SolutionDisplay from './KeywordDisplay'
 import QuestionDisplay from './QuestionDisplay'
 
 const QuestionPage = ({ navigation }: any) => {
@@ -38,40 +38,73 @@ const QuestionPage = ({ navigation }: any) => {
       <Header
         onPressBack={() => navigation.goBack()}
       />
-      <DateDisplay />
-      <View
-        style={{
-          paddingHorizontal: 36,
-        }}
-      >
-        <QuestionDisplay
-          question={question}
-          editable={editable}
-          typingNow={typingNow}
-          onPress={() => editable ? setTypingNow(true) : null}
-          onBlur={() => setTypingNow(false)}
-          onChangeText={(text: string) => setQuestion(text)}
-        />
+      <ScrollView>
+        <DateDisplay />
+        <View
+          style={{
+            paddingHorizontal: 36,
+          }}
+        >
+          <QuestionDisplay
+            question={question}
+            editable={editable}
+            typingNow={typingNow}
+            onPress={() => editable ? setTypingNow(true) : null}
+            onBlur={() => setTypingNow(false)}
+            onChangeText={(text: string) => setQuestion(text)}
+          />
+          {
+            question.length > 0 && editable &&
+            <PrimaryButton onPress={() => {
+              submit()
+              Keyboard.dismiss()
+            }} />
+          }
+        </View>
         {
-          question.length > 0 && editable &&
-          <PrimaryButton onPress={() => {
-            submit()
-            Keyboard.dismiss()
-          }} />
+          question.length > 0 && !typingNow && !editable &&
+          <AnswerDisplay answer={answer} />
         }
-      </View>
-      {
-        question.length > 0 && !typingNow && !editable &&
-        <AnswerDisplay answer={answer} />
-      }
-      {
-        question.length > 0 && !typingNow && !editable &&
-        <SentimentalAnalysisResulltDisplay />
-      }
-      {
-        question.length > 0 && !typingNow && !editable &&
-        <SolutionDisplay />
-      }
+        {
+          question.length > 0 && !typingNow && !editable &&
+          <SentimentalAnalysisResulltDisplay />
+        }
+        {
+          question.length > 0 && !typingNow && !editable &&
+          <SolutionDisplay />
+        }
+        {
+          question.length > 0 && !typingNow && !editable &&
+          <View
+            style={{
+              marginHorizontal: 36,
+              marginBottom: 36,
+            }}
+          >
+            <Pressable
+              onPress={() => navigation.navigate('SolutionCategories')}
+              style={{
+                justifyContent: 'center',
+                height: 48,
+                borderRadius: 10,
+                marginTop: 16,
+                alignItems: 'center',
+
+                borderColor: '#000',
+                borderWidth: 1,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                }}
+              >
+                솔루션 살펴보기
+              </Text>
+            </Pressable>
+          </View>
+        }
+      </ScrollView>
     </SafeAreaView>
   )
 }
