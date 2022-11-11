@@ -1,10 +1,11 @@
 import { StyleSheet, SafeAreaView, Text, Button, View, Pressable } from 'react-native'
 import React from 'react'
 import MainCard from './components/MainCard'
-import { Calendar, User } from 'react-native-feather';
+import { Bell, Calendar, User } from 'react-native-feather';
 import getTodayInString from './utils/getTodayInString';
 import DateDisplay from './pages/Question/DateDisplay';
 import Logo from './components/Logo';
+import NotificationBell from './components/NotificationBell';
 
 const Root = (props: any) => {
   return (
@@ -30,6 +31,16 @@ const Root = (props: any) => {
               marginRight: 8,
             }}
           >
+            <NotificationBell
+              notification
+            />
+          </View>
+          <View
+            style={{
+              marginLeft: 8,
+              marginRight: 8,
+            }}
+          >
             <Calendar
               color={'#000'}
             />
@@ -47,20 +58,7 @@ const Root = (props: any) => {
       </View>
       <View
         style={{
-          alignItems: 'center',
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 22,
-            fontWeight: 'bold',
-          }}
-        >오늘의 질문</Text>
-      </View>
-      <View
-        style={{
           flex: 1,
-          marginTop: 36,
           marginHorizontal: 36,
         }}
       >
@@ -109,7 +107,7 @@ const Root = (props: any) => {
       >
         <Text
           style={{
-            fontSize: 18,
+            fontSize: 16,
           }}
         >오늘의 질문을 입력해주세요</Text>
       </View>

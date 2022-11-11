@@ -12,7 +12,7 @@ const PrimaryButton = ({
       style={{
         backgroundColor: '#FFC226',
         justifyContent: 'center',
-        height: 60,
+        height: 48,
         borderRadius: 10,
         marginTop: 16,
         alignItems: 'center',
@@ -20,7 +20,7 @@ const PrimaryButton = ({
     >
       <Text
         style={{
-          fontSize: 18,
+          fontSize: 16,
         }}
       >
         작성 완료

@@ -30,7 +30,7 @@ const QuestionDisplay = ({
         typingNow ?
         <TextInput
           style={{
-            fontSize: 18,
+            fontSize: 16,
             paddingHorizontal: 24,
           }}
           autoFocus={editable}
@@ -48,7 +48,7 @@ const QuestionDisplay = ({
         >
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 16,
             }}
           >
             {

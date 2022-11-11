@@ -74,15 +74,15 @@ const QuestionPage = ({ navigation }: any) => {
           <AnswerDisplay answer={answer} />
         }
         {
-          question.length > 0 && !typingNow && !editable &&
+          question.length > 0 && !typingNow && !editable && answer.length > 0 &&
           <SentimentalAnalysisResulltDisplay />
         }
         {
-          question.length > 0 && !typingNow && !editable &&
+          question.length > 0 && !typingNow && !editable && answer.length > 0 &&
           <SolutionDisplay />
         }
         {
-          question.length > 0 && !typingNow && !editable &&
+          question.length > 0 && !typingNow && !editable && answer.length > 0 &&
           <View
             style={{
               marginHorizontal: 36,
@@ -104,7 +104,7 @@ const QuestionPage = ({ navigation }: any) => {
             >
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 16,
                 }}
               >
                 솔루션 살펴보기
