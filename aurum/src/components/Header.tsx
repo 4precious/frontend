@@ -2,8 +2,12 @@ import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { ChevronLeft } from 'react-native-feather'
 
-const Header = ({ onPressBack }: {
+const Header = ({
+  onPressBack,
+  title,
+}: {
   onPressBack?: () => void,
+  title?: string,
 }) => {
   return (
     <View style={{
@@ -22,6 +26,23 @@ const Header = ({ onPressBack }: {
           color={'#000'}
         />
       </Pressable>
+      <View>
+        <Text
+          style={{
+            fontSize: 16,
+            fontWeight: 'bold',
+          }}
+        >
+          {title}
+        </Text>
+      </View>
+      <View 
+        style={{
+          width: 24,
+          height: 24,
+          marginRight: 36,
+        }}
+      />
     </View>
   )
 }
