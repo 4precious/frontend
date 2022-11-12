@@ -44,16 +44,17 @@ const Root = (props: any) => {
               notification
             />
           </View>
-          <View
+          <Pressable
             style={{
               marginLeft: 8,
               marginRight: 8,
             }}
+            onPress={() => props.navigation.navigate('MonthlyView')}
           >
             <Calendar
               color={'#000'}
             />
-          </View>
+          </Pressable>
           <View
             style={{
               marginLeft: 8,

@@ -7,6 +7,7 @@ import QuestionPage from './src/pages/Question';
 import SolutionCategoriesPage from './src/pages/SolutionCategories';
 import ChildRoot from './src/indexChild';
 import AnswerPage from './src/pages/Answer';
+import MonthlyViewPage from './src/pages/MonthlyView';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,10 @@ export default function App() {
           <Stack.Screen
             name="Answer"
             component={AnswerPage}
+          />
+          <Stack.Screen
+            name="MonthlyView"
+            component={MonthlyViewPage}
           />
         </Stack.Navigator>
         <StatusBar style="auto" />
