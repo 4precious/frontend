@@ -2,13 +2,13 @@ import { View, Text, Pressable, TextInput } from 'react-native'
 import React from 'react'
 import { Edit } from 'react-native-feather'
 
-const QuestionDisplay = ({
-  question, editable, typingNow,
+const AnswerDisplay = ({
+  answer, editable, typingNow,
   onPress,
   onBlur,
   onChangeText,
 }: {
-  question: string,
+  answer: string,
   editable: boolean,
   typingNow: boolean,
   onPress?: () => void,
@@ -23,14 +23,15 @@ const QuestionDisplay = ({
         justifyContent: 'center',
         minHeight: 60,
         borderRadius: 10,
-        marginTop: 36,
+        marginTop: 10,
+        marginBottom:10,
       }}
     >
       {
         typingNow ?
         <TextInput
           style={{
-            fontSize: 16,
+            fontSize: 18,
             paddingHorizontal: 24,
             flexShrink: 1,
           }}
@@ -50,13 +51,14 @@ const QuestionDisplay = ({
         >
           <Text
             style={{
-              fontSize: 16,
+              fontSize: 18,
+              color: '#9A9A9A',
             }}
           >
             {
-              question.length > 0 ?
-              question :
-              '오늘의 질문을 입력해주세요'
+              answer.length > 0 ?
+              answer :
+              '답변 작성하기'
             }
           </Text>
           {
@@ -73,4 +75,4 @@ const QuestionDisplay = ({
   )
 }
 
-export default QuestionDisplay
+export default AnswerDisplay

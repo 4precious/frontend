@@ -19,7 +19,16 @@ const Root = (props: any) => {
         marginTop: 18,
         marginBottom: 36,
       }}>
-        <Logo size={22} />
+        <Pressable
+          onPress={() => props.navigation.navigate('ChildRoot')}
+        >
+          <Text
+            style={{
+              fontSize: 22,
+              fontWeight: 'bold',
+            }}
+          >4GZZ</Text>
+        </Pressable>
         <View
           style={{
             flexDirection: 'row',
