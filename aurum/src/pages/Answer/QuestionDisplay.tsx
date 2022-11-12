@@ -21,6 +21,7 @@ const QuestionDisplay = ({ question }: { question: string }) => {
           color: question.length > 0 ? '#000' : '#9A9A9A',
         }}
       >
+        {question}
       </Text>
         </View>
   )
