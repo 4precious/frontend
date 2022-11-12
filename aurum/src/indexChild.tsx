@@ -6,7 +6,7 @@ import getTodayInString from './utils/getTodayInString';
 import NotificationBell from './components/NotificationBell';
 
 const ChildRoot = (props: any) => {
-  const [question, setQuestion] = useState('오늘 학교 생활은 어땠어? 어땠냐구')
+  const [question, setQuestion] = useState('오늘 학교 생활은 어땠어?')
   //버튼 눌러야해서 일단 질문 있는거로 가정, true로 놓고 함
 
   return (
@@ -131,6 +131,8 @@ const ChildRoot = (props: any) => {
                     alignItems: question.length > 0 ? 'flex-start' : 'center',
                     justifyContent: question.length > 0 ? 'flex-start' : 'center',
                   }}
+                  ellipsizeMode='tail'
+                  numberOfLines={2}
                 >
                   {question}
                 </Text>
