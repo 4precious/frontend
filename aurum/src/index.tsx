@@ -3,6 +3,8 @@ import React from 'react'
 import MainCard from './components/MainCard'
 import { Calendar, User } from 'react-native-feather';
 import getTodayInString from './utils/getTodayInString';
+import DateDisplay from './pages/Question/DateDisplay';
+import Logo from './components/Logo';
 
 const Root = (props: any) => {
   return (
@@ -74,23 +76,13 @@ const Root = (props: any) => {
         <MainCard>
           <View
             style={{
-              margin: 16,
+              marginHorizontal: 8,
+              marginVertical: 8,
             }}
           >
-            <Text
-              style={{
-                fontSize: 64,
-              }}
-            >
-              {getTodayInString().month.toUpperCase()}
-            </Text>
-            <Text
-              style={{
-                fontSize: 64,
-              }}
-            >
-              {getTodayInString().date.toString().padStart(2, '0')}
-            </Text>
+            <DateDisplay
+              size={60}
+            />
           </View>
           <View
             style={{
