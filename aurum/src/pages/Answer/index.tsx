@@ -37,7 +37,15 @@ const AnswerPage = ({ navigation }: any) => {
         onPressBack={() => navigation.goBack()}
       />
       <ScrollView>
-        <DateDisplay />
+        <View
+          style={{
+            marginLeft: 36,
+          }}
+        >
+          <DateDisplay
+            size={48}
+          />
+        </View>
         <View
           style={{
             paddingHorizontal: 36,
