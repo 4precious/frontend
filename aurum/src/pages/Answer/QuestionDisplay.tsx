@@ -10,7 +10,7 @@ const QuestionDisplay = ({ question }: { question: string }) => {
         borderRadius: 10,
         borderColor: '#D3D3D3',
         borderWidth: 1,
-        height:60,
+        minHeight:60,
         alignItems: question.length > 0 ? 'flex-start' : 'center',
         justifyContent: question.length > 0 ? 'flex-start' : 'center',
       }}
@@ -21,6 +21,7 @@ const QuestionDisplay = ({ question }: { question: string }) => {
           color: question.length > 0 ? '#000' : '#9A9A9A',
         }}
       >
+        {question}
       </Text>
         </View>
   )

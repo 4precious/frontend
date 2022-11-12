@@ -21,7 +21,7 @@ const QuestionDisplay = ({
       style={{
         backgroundColor: '#f2f2f2',
         justifyContent: 'center',
-        height: 60,
+        minHeight: 60,
         borderRadius: 10,
         marginTop: 36,
       }}
