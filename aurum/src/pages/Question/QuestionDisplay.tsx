@@ -30,7 +30,7 @@ const QuestionDisplay = ({
         typingNow ?
         <TextInput
           style={{
-            fontSize: 18,
+            fontSize: 16,
             paddingHorizontal: 24,
             flexShrink: 1,
           }}
@@ -50,7 +50,7 @@ const QuestionDisplay = ({
         >
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 16,
             }}
           >
             {

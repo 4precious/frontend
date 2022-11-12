@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 import MainCard from './components/MainCard'
 import { Calendar, User } from 'react-native-feather';
 import getTodayInString from './utils/getTodayInString';
+import NotificationBell from './components/NotificationBell';
 
 const ChildRoot = (props: any) => {
   const [question, setQuestion] = useState(true)
@@ -38,6 +39,15 @@ const ChildRoot = (props: any) => {
           <View
             style={{
               marginRight: 8,
+            }}
+          >
+            <NotificationBell
+              notification
+            />
+          </View>
+          <View
+            style={{
+              marginHorizontal: 8,
             }}
           >
             <Calendar

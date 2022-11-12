@@ -15,7 +15,7 @@ const Header = ({
       alignItems: 'center',
       justifyContent: 'space-between',
       height: 48,
-      paddingLeft: 36,
+      paddingLeft: 24,
       marginTop: 18,
       // marginBottom: 36,
     }}>

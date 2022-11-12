@@ -17,7 +17,7 @@ const AnswerDisplay = ({ answer }: { answer: string }) => {
     >
       <Text
         style={{
-          fontSize: 18,
+          fontSize: 16,
           color: answer.length > 0 ? '#000' : '#9A9A9A',
         }}
       >
