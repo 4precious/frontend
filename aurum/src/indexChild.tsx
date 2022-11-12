@@ -6,7 +6,7 @@ import getTodayInString from './utils/getTodayInString';
 import NotificationBell from './components/NotificationBell';
 
 const ChildRoot = (props: any) => {
-  const [question, setQuestion] = useState(true)
+  const [question, setQuestion] = useState('오늘 학교 생활은 어땠어?')
   //버튼 눌러야해서 일단 질문 있는거로 가정, true로 놓고 함
 
   return (
@@ -111,6 +111,38 @@ const ChildRoot = (props: any) => {
               alignItems: 'center',
             }}
           >
+            {question
+              ?
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "center"
+                }}
+              >
+                <Text
+                  style={{
+                    backgroundColor:"#F2F2F2",
+                    borderRadius: 10,
+                    overflow: 'hidden',
+                    fontSize: 16,
+                    fontWeight: '500',
+                    padding: 16,
+                    minHeight:48,
+                    alignItems: question.length > 0 ? 'flex-start' : 'center',
+                    justifyContent: question.length > 0 ? 'flex-start' : 'center',
+                  }}
+                  ellipsizeMode='tail'
+                  numberOfLines={2}
+                >
+                  {question}
+                </Text>
+                <Image 
+                  source = {require('../assets/icons/vector412.png')}
+                />
+              </View>
+              :
+              <Text/>
+            }
             <Image source=
             {question 
               ? 
