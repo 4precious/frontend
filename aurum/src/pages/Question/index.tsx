@@ -7,7 +7,7 @@ import AnswerDisplay from './AnswerDisplay'
 import SentimentalAnalysisResulltDisplay from './SentimentalAnalysisResulltDisplay'
 import SolutionDisplay from './KeywordDisplay'
 import QuestionDisplay from './QuestionDisplay'
-
+ 
 const QuestionPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
   const [question, setQuestion] = useState('')

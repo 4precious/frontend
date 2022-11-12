@@ -1,10 +1,13 @@
-import { StyleSheet, SafeAreaView, Text, Button, View, Pressable } from 'react-native'
-import React from 'react'
+import { StyleSheet, SafeAreaView, Text, Button, Image, View, Pressable } from 'react-native'
+import React, {useState} from 'react'
 import MainCard from './components/MainCard'
 import { Calendar, User } from 'react-native-feather';
 import getTodayInString from './utils/getTodayInString';
 
-const Root = (props: any) => {
+const ChildRoot = (props: any) => {
+  const [question, setQuestion] = useState(true)
+  //버튼 눌러야해서 일단 질문 있는거로 가정, true로 놓고 함
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{
@@ -17,7 +20,7 @@ const Root = (props: any) => {
         marginBottom: 36,
       }}>
         <Pressable
-          onPress={() => props.navigation.navigate('ChildRoot')}
+          onPress={() => props.navigation.navigate('Root')}
         >
           <Text
             style={{
@@ -79,14 +82,14 @@ const Root = (props: any) => {
           >
             <Text
               style={{
-                fontSize: 64,
+                fontSize: 50,
               }}
             >
               {getTodayInString().month.toUpperCase()}
             </Text>
             <Text
               style={{
-                fontSize: 64,
+                fontSize: 50,
               }}
             >
               {getTodayInString().date.toString().padStart(2, '0')}
@@ -95,27 +98,47 @@ const Root = (props: any) => {
           <View
             style={{
               flex: 1,
-            }}
-          >
-
-          </View>
-          <Pressable
-            style={{
-              borderRadius: 10,
-              borderColor: '#000',
-              borderWidth: 1,
               alignItems: 'center',
-              justifyContent: 'center',
-              height: 48,
             }}
-            onPress={() => props.navigation.navigate('Question')}
           >
+            <Image source=
+            {question 
+              ? 
+              require('../assets/icons/loveletter.png') 
+              : 
+              require('../assets/icons/leaves.png')
+            }/>
+          </View>
+          {
+            question 
+            ?
+            <Pressable
+              style={{
+                borderRadius: 10,
+                borderColor: '#000',
+                borderWidth: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: 48,
+              }}
+              onPress={() => props.navigation.navigate('Answer')}
+            >
+              <Text
+                style={{
+                  fontSize: 16,
+                }}
+              >답변 작성하기</Text>
+            </Pressable>
+            :
             <Text
               style={{
                 fontSize: 16,
+                fontWeight: '500',
+                textAlign: 'center',
+                marginBottom : 30,
               }}
-            >질문 작성하기</Text>
-          </Pressable>
+            >아직 질문이 도착하지 않았어요</Text>
+          }
         </MainCard>
       </View>
       <View
@@ -124,17 +147,12 @@ const Root = (props: any) => {
           alignItems: 'center',
         }}
       >
-        <Text
-          style={{
-            fontSize: 18,
-          }}
-        >오늘의 질문을 입력해주세요</Text>
       </View>
     </SafeAreaView>
   )
 }
 
-export default Root
+export default ChildRoot
 
 const styles = StyleSheet.create({
   container: {

@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import QuestionPage from './src/pages/Question';
 import SolutionCategoriesPage from './src/pages/SolutionCategories';
+import ChildRoot from './src/indexChild';
+import AnswerPage from './src/pages/Answer';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +29,14 @@ export default function App() {
           <Stack.Screen
             name="SolutionCategories"
             component={SolutionCategoriesPage}
+          />
+          <Stack.Screen
+            name="ChildRoot"
+            component={ChildRoot}
+          />
+          <Stack.Screen
+            name="Answer"
+            component={AnswerPage}
           />
         </Stack.Navigator>
         <StatusBar style="auto" />
