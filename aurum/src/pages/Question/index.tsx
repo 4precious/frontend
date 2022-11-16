@@ -1,10 +1,10 @@
 import { SafeAreaView, StyleSheet, View, Text, Alert, Keyboard, Pressable, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../../components/Header'
-import DateDisplay from './DateDisplay'
-import PrimaryButton from './PrimaryButton'
+import DateDisplay from '../../components/DateDisplay'
+import PrimaryButton from '../../components/PrimaryButton'
 import AnswerDisplay from './AnswerDisplay'
-import SentimentalAnalysisResulltDisplay from './SentimentalAnalysisResulltDisplay'
+import SentimentalAnalysisResulltDisplay from '../../components/SentimentalAnalysisResulltDisplay'
 import SolutionDisplay from './KeywordDisplay'
 import QuestionDisplay from './QuestionDisplay'
  

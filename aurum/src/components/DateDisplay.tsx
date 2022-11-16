@@ -1,13 +1,13 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import getTodayInString from '../../utils/getTodayInString'
+import getTodayInString from '../utils/getTodayInString'
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 
 const DateDisplay = ({ size }: { size: number }) => {
   let [fontsLoaded] = useFonts({
-    'Poppins': require('../../../assets/fonts/Poppins-Regular.ttf'),
-    'Poppins-Bold': require('../../../assets/fonts/Poppins-Bold.ttf'),
+    'Poppins': require('../../assets/fonts/Poppins-Regular.ttf'),
+    'Poppins-Bold': require('../../assets/fonts/Poppins-Bold.ttf'),
   });
 
   if (!fontsLoaded) {

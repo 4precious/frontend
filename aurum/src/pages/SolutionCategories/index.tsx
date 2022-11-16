@@ -57,6 +57,7 @@ const SolutionCategoriesPage = ({ navigation }: any) => {
         }}
       >
         <ItemBox
+          onPress={() => navigation.navigate('Solution')}
           title='학업'
         />
         <ItemBox
