@@ -1,8 +1,10 @@
-import { Pressable, SafeAreaView, Text, View } from 'react-native'
+import { Pressable, SafeAreaView, Text, Image, View } from 'react-native'
 import React from 'react'
 import Header from '../../components/Header'
 import Divider from '../../components/Divider'
-import { ChevronRight } from 'react-native-feather'
+import { Bold, ChevronRight } from 'react-native-feather'
+
+
 
 const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) => {
   return (
@@ -23,10 +25,11 @@ const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) =>
           alignItems: 'center',
           paddingHorizontal: 24,
         }}
-      >
+      > 
         <Text
           style={{
-            fontSize: 16,
+            fontSize:16,
+            fontWeight: '500'
           }}
         >
           {title}
@@ -57,20 +60,21 @@ const SolutionCategoriesPage = ({ navigation }: any) => {
         }}
       >
         <ItemBox
-          onPress={() => navigation.navigate('Solution')}
-          title='학업'
+          onPress={() => navigation.navigate('SolutionFriend')}
+          title='친구'
         />
         <ItemBox
-          title='인간관계'
+          onPress={() => navigation.navigate('SolutionStudy')}
+          title='공부'
         />
         <ItemBox
-          title='진로'
+          title='훈육'
         />
         <ItemBox
-          title='게임'
+          title='형제'
         />
         <ItemBox
-          title='기타'
+          title='사춘기'
         />
       </View>
     </SafeAreaView>

@@ -10,6 +10,10 @@ const SolutionPage = ({ navigation }: any) => {
         backgroundColor: '#fff'
       }}
     >
+      <Header
+        onPressBack={() => navigation.goBack()}
+        title='친구'
+      />
         
     </SafeAreaView>
   )

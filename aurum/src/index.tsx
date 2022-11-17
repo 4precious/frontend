@@ -1,4 +1,4 @@
-import { StyleSheet, SafeAreaView, Text, Button, View, Pressable } from 'react-native'
+import { StyleSheet, SafeAreaView, Text, Button, Image, View, Pressable } from 'react-native'
 import React from 'react'
 import MainCard from './components/MainCard'
 import { Bell, Calendar, User } from 'react-native-feather';
@@ -86,9 +86,13 @@ const Root = (props: any) => {
           <View
             style={{
               flex: 1,
+              alignItems: 'center',
             }}
           >
-
+            <Image 
+                  source = {require('../assets/icons/child.png')}
+                  style = {{height:260, width:200,}}
+                />
           </View>
           <Pressable
             style={{
