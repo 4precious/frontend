@@ -1,17 +1,18 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import getTodayInString from '../utils/getTodayInString'
-import AppLoading from 'expo-app-loading';
+import SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 
 const DateDisplay = ({ size }: { size: number }) => {
   let [fontsLoaded] = useFonts({
-    'Poppins': require('../../assets/fonts/Poppins-Regular.ttf'),
-    'Poppins-Bold': require('../../assets/fonts/Poppins-Bold.ttf'),
+    'Poppins': require('../../../assets/fonts/Poppins-Regular.ttf'),
+    'Poppins-Regular': require('../../../assets/fonts/Poppins-Regular.ttf'),
+    'Poppins-Bold': require('../../../assets/fonts/Poppins-Bold.ttf'),
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
   else {
     return (
@@ -26,7 +27,7 @@ const DateDisplay = ({ size }: { size: number }) => {
             fontSize: size,
             fontFamily: 'Poppins-Regular',
             padding: 0,
-            marginBottom: - (size / 6),
+            marginBottom: - (size / 3),
           }}
         >
           {getTodayInString().month.toUpperCase()}

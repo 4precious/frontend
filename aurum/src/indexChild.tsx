@@ -18,7 +18,6 @@ const ChildRoot = (props: any) => {
         height: 48,
         paddingLeft: 36,
         marginTop: 18,
-        marginBottom: 36,
       }}>
         <Pressable
           onPress={() => props.navigation.navigate('Root')}
@@ -64,18 +63,6 @@ const ChildRoot = (props: any) => {
             />
           </View>
         </View>
-      </View>
-      <View
-        style={{
-          alignItems: 'center',
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 22,
-            fontWeight: 'bold',
-          }}
-        >오늘의 질문</Text>
       </View>
       <View
         style={{

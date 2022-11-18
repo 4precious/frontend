@@ -80,7 +80,7 @@ const Root = (props: any) => {
             }}
           >
             <DateDisplay
-              size={60}
+              size={50}
             />
           </View>
           <View
