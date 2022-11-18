@@ -1,7 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 // import getTodayInString from '../../utils/getTodayInString'
-import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 
 const MonthDisplay = ({ size }: { size: number }) => {
@@ -11,7 +10,7 @@ const MonthDisplay = ({ size }: { size: number }) => {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
   else {
     return (

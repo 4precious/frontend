@@ -1,6 +1,5 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 
 const Logo = ({ size }: { size: number }) => {
@@ -10,7 +9,7 @@ const Logo = ({ size }: { size: number }) => {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
   else {
     return (

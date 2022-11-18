@@ -83,7 +83,7 @@ const Calendar = () => {
           </Pressable>
         )}
         numColumns={7}
-        keyExtractor={(item) => item.toString()}
+        keyExtractor={(item) => item.date.toString()}
       />
     </View>
   )

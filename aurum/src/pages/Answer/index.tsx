@@ -9,7 +9,7 @@ import SentimentalAnalysisResulltDisplay from '../Question/SentimentalAnalysisRe
 
 const AnswerPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
-  const [question, setQuestion] = useState('lorem ipsum dolor sit amet, consectetur adipiscing elit?')
+  const [question, setQuestion] = useState('Q. 오늘 학교 생활은 어땠어?')
   const [answer, setAnswer] = useState('')
   const [editable, setEditable] = useState(true)
 
