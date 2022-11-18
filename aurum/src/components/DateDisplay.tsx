@@ -6,9 +6,9 @@ import { useFonts } from 'expo-font';
 
 const DateDisplay = ({ size }: { size: number }) => {
   let [fontsLoaded] = useFonts({
-    'Poppins': require('../../../assets/fonts/Poppins-Regular.ttf'),
-    'Poppins-Regular': require('../../../assets/fonts/Poppins-Regular.ttf'),
-    'Poppins-Bold': require('../../../assets/fonts/Poppins-Bold.ttf'),
+    'Poppins': require('../../assets/fonts/Poppins-Regular.ttf'),
+    'Poppins-Regular': require('../../assets/fonts/Poppins-Regular.ttf'),
+    'Poppins-Bold': require('../../assets/fonts/Poppins-Bold.ttf'),
   });
 
   if (!fontsLoaded) {
