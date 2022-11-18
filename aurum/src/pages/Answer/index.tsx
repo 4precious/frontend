@@ -1,11 +1,11 @@
 import { SafeAreaView, StyleSheet, View, Text, Alert, Keyboard, Pressable, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../../components/Header'
-import DateDisplay from '../Question/DateDisplay'
-import PrimaryButton from '../Question/PrimaryButton'
+import DateDisplay from '../../components/DateDisplay'
+import PrimaryButton from '../../components/PrimaryButton'
 import AnswerDisplay from '../Answer/AnswerDisplay'
 import QuestionDisplay from '../Answer/QuestionDisplay'
-import SentimentalAnalysisResulltDisplay from '../Question/SentimentalAnalysisResulltDisplay'
+import SentimentalAnalysisResulltDisplay from '../../components/SentimentalAnalysisResulltDisplay'
 
 const AnswerPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)

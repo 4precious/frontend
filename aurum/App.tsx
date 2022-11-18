@@ -5,9 +5,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import QuestionPage from './src/pages/Question';
 import SolutionCategoriesPage from './src/pages/SolutionCategories';
+import SolutionPage from './src/pages/Solution/indexFriend';
+import SolutionPage2 from './src/pages/Solution/indexStudy';
 import ChildRoot from './src/indexChild';
 import AnswerPage from './src/pages/Answer';
 import MonthlyViewPage from './src/pages/MonthlyView';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +33,14 @@ export default function App() {
           <Stack.Screen
             name="SolutionCategories"
             component={SolutionCategoriesPage}
+          />
+          <Stack.Screen
+            name="SolutionFriend"
+            component={SolutionPage}
+          />
+          <Stack.Screen
+            name="SolutionStudy"
+            component={SolutionPage2}
           />
           <Stack.Screen
             name="ChildRoot"

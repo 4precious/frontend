@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import getTodayInString from '../../utils/getTodayInString'
+import getTodayInString from '../utils/getTodayInString'
 import SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 
