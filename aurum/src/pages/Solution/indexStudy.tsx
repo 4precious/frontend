@@ -12,7 +12,7 @@ const SolutionPage2 = ({ navigation }: any) => {
     >
       <Header
         onPressBack={() => navigation.goBack()}
-        title='학업'
+        title='4. 공부할 때, 잡생각이 많은 아이'
       />
         
     </SafeAreaView>

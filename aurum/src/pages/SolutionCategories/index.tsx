@@ -1,9 +1,10 @@
-import {  Pressable, Button, SafeAreaView, Text, View } from 'react-native'
+import {  Pressable, SafeAreaView, Text, View } from 'react-native'
 import React from 'react'
 import { NavigationContainer} from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
-import { ChevronRight, ChevronLeft } from 'react-native-feather'
+import { ChevronRight } from 'react-native-feather'
 import StudySolution from '../Solution/indexStudy'
+import Header from '../../components/Header'
 
 const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) => {
   return (
@@ -49,6 +50,10 @@ export const Main = ({ navigation }:any) => {
         backgroundColor: '#fff'
       }}
     >
+      <Header
+        onPressBack={() => navigation.navigate('SolutionCategories')}
+        title='솔루션 카테고리'
+      />
       <View
         style={{
           marginTop:6,
@@ -77,15 +82,13 @@ export const Main = ({ navigation }:any) => {
   );
 }
 
-
-export const Notifications = ()=> {
+export const DUMMY = ()=> {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>고고</Text>
+      <Text>dummy</Text>
     </View>
   );
 }
-
 
 const Drawer = createDrawerNavigator();
 
@@ -93,13 +96,24 @@ export const MyDrawer = () => {
   return (
     <Drawer.Navigator
       useLegacyImplementation screenOptions={{drawerPosition:'right'}}>
-      <Drawer.Screen name="솔루션 카테고리" component={Main} />
-      <Drawer.Screen name="Notifications" component={StudySolution} />
+      <Drawer.Screen name="솔루션 카테고리" component={Main}
+      options={{
+        headerShown:false
+      }} />
+      <Drawer.Screen name="1. 도대체 가만히 앉아있지를 못해요" component={DUMMY} />
+      <Drawer.Screen name="2. 공부를 생각한다면, 육아에서 경계해아 할 것" component={DUMMY} />
+      <Drawer.Screen name="3. 꼭 특출할 필요까지는 없어" component={DUMMY} />
+      <Drawer.Screen name="4. 공부할 때, 잡생각이 많은 아이" component={StudySolution}
+      options={{
+        headerShown:false
+      }}/>
+      <Drawer.Screen name="5. 공부는 지루하고 지겨운거야" component={DUMMY} />
+      <Drawer.Screen name="6. 늦게 숙제하려니까 힘들지 않았어?" component={DUMMY} />
+      <Drawer.Screen name="7. '최선'에 대해서 어떻게 생각하세요" component={DUMMY} />
+      <Drawer.Screen name="8. 열심히 하는 게 제일 중요해" component={DUMMY} />
     </Drawer.Navigator>
   );
 }
-
-
 
 const SolutionPage = ({navigation} :any) => {
   return (
