@@ -1,10 +1,9 @@
-import { Pressable, SafeAreaView, Text, Image, View } from 'react-native'
+import {  Pressable, Button, SafeAreaView, Text, View } from 'react-native'
 import React from 'react'
-import Header from '../../components/Header'
-import Divider from '../../components/Divider'
-import { Bold, ChevronRight } from 'react-native-feather'
-
-
+import { NavigationContainer} from '@react-navigation/native';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+import { ChevronRight, ChevronLeft } from 'react-native-feather'
+import StudySolution from '../Solution/indexStudy'
 
 const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) => {
   return (
@@ -15,7 +14,7 @@ const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) =>
         justifyContent: 'center',
         height: 100,
         borderRadius: 10,
-        marginTop: 10,
+        marginTop: 15,
       }}
     >
       <View
@@ -42,7 +41,7 @@ const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) =>
   )
 }
 
-const SolutionCategoriesPage = ({ navigation }: any) => {
+export const Main = ({ navigation }:any) => {
   return (
     <SafeAreaView
       style={{
@@ -50,22 +49,18 @@ const SolutionCategoriesPage = ({ navigation }: any) => {
         backgroundColor: '#fff'
       }}
     >
-      <Header
-        onPressBack={() => navigation.goBack()}
-        title='솔루션 카테고리'
-      />
       <View
         style={{
+          marginTop:6,
           paddingHorizontal: 16,
         }}
       >
         <ItemBox
-          onPress={() => navigation.navigate('SolutionFriend')}
-          title='친구'
+          onPress={() => navigation.openDrawer()}
+          title='공부'
         />
         <ItemBox
-          onPress={() => navigation.navigate('SolutionStudy')}
-          title='공부'
+          title='친구'
         />
         <ItemBox
           title='훈육'
@@ -78,7 +73,42 @@ const SolutionCategoriesPage = ({ navigation }: any) => {
         />
       </View>
     </SafeAreaView>
+
+  );
+}
+
+
+export const Notifications = ()=> {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>고고</Text>
+    </View>
+  );
+}
+
+
+const Drawer = createDrawerNavigator();
+
+export const MyDrawer = () => {
+  return (
+    <Drawer.Navigator
+      useLegacyImplementation screenOptions={{drawerPosition:'right'}}>
+      <Drawer.Screen name="솔루션 카테고리" component={Main} />
+      <Drawer.Screen name="Notifications" component={StudySolution} />
+    </Drawer.Navigator>
+  );
+}
+
+
+
+const SolutionPage = ({navigation} :any) => {
+  return (
+    <NavigationContainer independent={true}>
+      <MyDrawer />
+    </NavigationContainer>
   )
 }
 
-export default SolutionCategoriesPage
+export default SolutionPage
+
+
