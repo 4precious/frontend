@@ -6,7 +6,7 @@ import getTodayInString from './utils/getTodayInString';
 import NotificationBell from './components/NotificationBell';
 
 const ChildRoot = (props: any) => {
-  const [question, setQuestion] = useState('오늘 학교 생활은 어땠어?')
+  const [question, setQuestion] = useState("오늘 학교 생활은 어땠어?")
   //버튼 눌러야해서 일단 질문 있는거로 가정, true로 놓고 함
 
   return (
@@ -49,9 +49,17 @@ const ChildRoot = (props: any) => {
               marginHorizontal: 8,
             }}
           >
-            <Calendar
-              color={'#000'}
-            />
+            <Pressable
+              style={{
+                marginLeft: 8,
+                marginRight: 8,
+              }}
+              onPress={() => props.navigation.navigate('MonthlyView')}
+            >
+              <Calendar
+                color={'#000'}
+              />
+            </Pressable>
           </View>
           <View
             style={{
@@ -103,7 +111,8 @@ const ChildRoot = (props: any) => {
               <View
                 style={{
                   flex: 1,
-                  alignItems: "center"
+                  alignItems: "center",
+                  marginTop:10,
                 }}
               >
                 <Text
@@ -128,7 +137,11 @@ const ChildRoot = (props: any) => {
                 />
               </View>
               :
-              <Text/>
+              <Text
+                style={{
+                  marginTop:20
+              }}
+              />
             }
             <Image source=
             {question 
@@ -136,7 +149,10 @@ const ChildRoot = (props: any) => {
               require('../assets/icons/loveletter.png') 
               : 
               require('../assets/icons/leaves.png')
-            }/>
+            }
+            style={{
+              marginBottom: 40,
+            }}/>
           </View>
           {
             question 

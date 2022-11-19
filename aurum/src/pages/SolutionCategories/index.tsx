@@ -1,4 +1,4 @@
-import {  Pressable, SafeAreaView, Text, View } from 'react-native'
+import {  Pressable, SafeAreaView, Text, View, ScrollView } from 'react-native'
 import React from 'react'
 import { NavigationContainer} from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
@@ -54,7 +54,7 @@ export const Main = ({ navigation }:any) => {
         onPressBack={() => navigation.navigate('SolutionCategories')}
         title='솔루션 카테고리'
       />
-      <View
+      <ScrollView
         style={{
           marginTop:6,
           paddingHorizontal: 16,
@@ -65,18 +65,18 @@ export const Main = ({ navigation }:any) => {
           title='공부'
         />
         <ItemBox
-          title='친구'
+          title='친구관계'
         />
         <ItemBox
-          title='훈육'
+          title='훈육법'
         />
         <ItemBox
-          title='형제'
+          title='형제관계'
         />
         <ItemBox
           title='사춘기'
         />
-      </View>
+      </ScrollView>
     </SafeAreaView>
 
   );
@@ -95,7 +95,7 @@ const Drawer = createDrawerNavigator();
 export const MyDrawer = () => {
   return (
     <Drawer.Navigator
-      useLegacyImplementation screenOptions={{drawerPosition:'right'}}>
+      useLegacyImplementation screenOptions={{drawerPosition:'right', drawerActiveBackgroundColor:'#FFC226',drawerActiveTintColor:'#000'}}>
       <Drawer.Screen name="솔루션 카테고리" component={Main}
       options={{
         headerShown:false
