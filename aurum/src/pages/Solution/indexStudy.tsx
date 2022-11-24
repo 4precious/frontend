@@ -1,9 +1,25 @@
-import { StyleSheet, Pressable, SafeAreaView, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, Alert, SafeAreaView, Text, View, Image, ScrollView } from 'react-native'
 import React from 'react'
-import Header from '../../components/Header'
+import Header from '../Solution/Header'
 import SolutionCard from './SolutionCard'
 
 const SolutionStudy = ({ navigation }: any) => {
+
+  const press = (text:string, info:string) => {
+    Alert.alert(text, info, [
+      {
+        text: "취소",
+        style: "cancel"
+      },
+      {
+        text: "확인",
+        onPress: () => {
+          console.log('작동중')
+        }
+      }
+    ])
+  }
+
   return (
     <SafeAreaView
       style={{
@@ -23,7 +39,7 @@ const SolutionStudy = ({ navigation }: any) => {
             alignItems: 'center',
             marginHorizontal:30,
           }}>
-          <Image source = {require('../../../assets/icons/studychild.png')}
+          <Image source = {require('../../../assets/icons/studychild.png')} //이미지 변경 예정 (구림..)
           style = {{width: 250, height:200}} />
           <Text
             style={styles.title}>
@@ -46,7 +62,7 @@ const SolutionStudy = ({ navigation }: any) => {
             <Text style = {styles.highlight}>당연히 컴퓨터나 스마트폰은 아이방이 아니라 거실에 두어야합니다.</Text>
             상황이 안된다면 최소한 책상 앞에 앉았을 때 보이지 않는 위치에 두세요.{'\n'}{'\n'}
             잡생각이 많은 아이들은 시끄러워도 집중이 안됩니다.
-            거실에서 부모가 소곤소곤 이야기하는 소리만 들려도 그쪽으로 귀가 열려서 집중할 수 없어요.
+            거실에서 부모가 소곤소곤 이야기하는 소리만 들려도 그쪽으로 귀가 열려서 집중할 수 없어요.{'\n'}
             <Text style = {styles.highlight}>아이가 공부한다고 앉으면 부모는 전화통화나 TV를 보는 것도 삼가는 것이 좋아요</Text>{'\n'}{'\n'}
             아이가 주변을 정리한다음, 공부를 시작할 때는 부모가 간단하게는 공부할 내용의 개요와 단계를 설명해주세요. 
             뭘 하기 위해 책상 위에 앉은 것인지 확인시키는 것이죠. <Text style = {styles.highlight}>아이에게 단기목표를 설정해 주는 겁니다. </Text>
@@ -54,17 +70,24 @@ const SolutionStudy = ({ navigation }: any) => {
           </Text>
         </View>
         <Text style = {{fontSize: 15, color: '#FFC226', fontWeight: '700', lineHeight:28, marginLeft:30, }}>
-          # 당신만을 위한 추천
+          # 우리 아이를 위한 추천
         </Text>
         <Text style={{ fontSize: 20, color: '#000', fontWeight: '700',  marginLeft:30, marginBottom:12,}}>
           다양한 맞춤형 서비스가 있어요!
         </Text>
         <ScrollView horizontal = {true} showsHorizontalScrollIndicator={false} style = {{height:230, marginLeft:30,}}>
-            <SolutionCard></SolutionCard>
-            <SolutionCard></SolutionCard>
+            <SolutionCard 
+              onPress = {()=>{press('1번 가전 작동할까요???','TV 그만봐!!')}} 
+              title = 'TV 시청제한'
+              card = 'TV'
+              info = 'LG 스마트 TV의 시청제한 기능으로 집중력 향상'/>
+            <SolutionCard 
+              onPress = {()=>{press('2번 가전 작동할까요???','피톤치드 칙칙')}} 
+              title = '피톤치드로 집중력 향상'
+              card = 'diffuser'
+              info = 'LG 스마트 아우라 디퓨저의 피톤치드 향으로 집중력 향상'/>
         </ScrollView>
-      </ScrollView>
-        
+      </ScrollView>       
     </SafeAreaView>
   )
 }

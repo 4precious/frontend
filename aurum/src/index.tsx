@@ -60,9 +60,11 @@ const Root = (props: any) => {
               marginLeft: 8,
             }}
           >
-            <User
-              color={'#000'}
-            />
+            <Pressable onPress={() => props.navigation.navigate('Login')}>
+              <User
+                color={'#000'}
+              />
+            </Pressable>
           </View>
         </View>
       </View>

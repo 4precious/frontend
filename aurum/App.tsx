@@ -9,7 +9,9 @@ import SolutionStudy from './src/pages/Solution/indexStudy';
 import ChildRoot from './src/indexChild';
 import AnswerPage from './src/pages/Answer';
 import MonthlyViewPage from './src/pages/MonthlyView';
-
+import Login from './src/pages/Login';
+import AdminInfo from './src/pages/Admin/info';
+import AdminCategory from './src/pages/Admin/category';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,18 @@ export default function App() {
             headerShown: false,
           }}
         >
+          <Stack.Screen
+            name="Login"
+            component={Login}
+          />
+          <Stack.Screen
+            name="AdminCategory"
+            component={AdminCategory}
+          />
+          <Stack.Screen
+            name="AdminInfo"
+            component={AdminInfo}
+          />
           <Stack.Screen
             name="Root"
             component={Root}
