@@ -5,12 +5,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import QuestionPage from './src/pages/Question';
 import SolutionCategoriesPage from './src/pages/SolutionCategories';
-import SolutionPage from './src/pages/Solution/indexFriend';
-import SolutionPage2 from './src/pages/Solution/indexStudy';
+import SolutionStudy from './src/pages/Solution/indexStudy';
 import ChildRoot from './src/indexChild';
 import AnswerPage from './src/pages/Answer';
 import MonthlyViewPage from './src/pages/MonthlyView';
-
+import Login from './src/pages/Login';
+import AdminInfo from './src/pages/Admin/info';
+import AdminCategory from './src/pages/Admin/category';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,18 @@ export default function App() {
             headerShown: false,
           }}
         >
+          <Stack.Screen
+            name="Login"
+            component={Login}
+          />
+          <Stack.Screen
+            name="AdminCategory"
+            component={AdminCategory}
+          />
+          <Stack.Screen
+            name="AdminInfo"
+            component={AdminInfo}
+          />
           <Stack.Screen
             name="Root"
             component={Root}
@@ -35,12 +48,8 @@ export default function App() {
             component={SolutionCategoriesPage}
           />
           <Stack.Screen
-            name="SolutionFriend"
-            component={SolutionPage}
-          />
-          <Stack.Screen
             name="SolutionStudy"
-            component={SolutionPage2}
+            component={SolutionStudy}
           />
           <Stack.Screen
             name="ChildRoot"
