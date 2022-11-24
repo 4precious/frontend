@@ -71,9 +71,11 @@ const Root = (props: any) => {
               marginLeft: 8,
             }}
           >
-            <User
-              color={'#000'}
-            />
+            <Pressable onPress={() => props.navigation.navigate('Login')}>
+              <User
+                color={'#000'}
+              />
+            </Pressable>
           </View>
         </View>
       </View>
@@ -101,7 +103,7 @@ const Root = (props: any) => {
             }}
           >
             <Image 
-                  source = {require('../assets/icons/child.png')}
+                  source = {require('../assets/icons/ChildDefault.png')}
                   style = {{height:260, width:200,}}
                 />
           </View>

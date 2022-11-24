@@ -1,10 +1,10 @@
-import { Pressable, SafeAreaView, Text, Image, View } from 'react-native'
+import {  Pressable, SafeAreaView, Text, View, ScrollView } from 'react-native'
 import React from 'react'
+import { NavigationContainer} from '@react-navigation/native';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+import { ChevronRight } from 'react-native-feather'
+import StudySolution from '../Solution/indexStudy'
 import Header from '../../components/Header'
-import Divider from '../../components/Divider'
-import { Bold, ChevronRight } from 'react-native-feather'
-
-
 
 const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) => {
   return (
@@ -15,7 +15,7 @@ const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) =>
         justifyContent: 'center',
         height: 100,
         borderRadius: 10,
-        marginTop: 10,
+        marginTop: 15,
       }}
     >
       <View
@@ -42,7 +42,7 @@ const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) =>
   )
 }
 
-const SolutionCategoriesPage = ({ navigation }: any) => {
+export const Main = ({ navigation }:any) => {
   return (
     <SafeAreaView
       style={{
@@ -51,34 +51,78 @@ const SolutionCategoriesPage = ({ navigation }: any) => {
       }}
     >
       <Header
-        onPressBack={() => navigation.goBack()}
+        onPressBack={() => navigation.navigate('SolutionCategories')}
         title='솔루션 카테고리'
       />
-      <View
+      <ScrollView
         style={{
+          marginTop:6,
           paddingHorizontal: 16,
         }}
       >
         <ItemBox
-          onPress={() => navigation.navigate('SolutionFriend')}
-          title='친구'
-        />
-        <ItemBox
-          onPress={() => navigation.navigate('SolutionStudy')}
+          onPress={() => navigation.openDrawer()}
           title='공부'
         />
         <ItemBox
-          title='훈육'
+          title='친구관계'
         />
         <ItemBox
-          title='형제'
+          title='훈육법'
+        />
+        <ItemBox
+          title='형제관계'
         />
         <ItemBox
           title='사춘기'
         />
-      </View>
+      </ScrollView>
     </SafeAreaView>
+
+  );
+}
+
+export const DUMMY = ()=> {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>dummy</Text>
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+
+export const MyDrawer = () => {
+  return (
+    <Drawer.Navigator
+      useLegacyImplementation screenOptions={{drawerPosition:'right', drawerActiveBackgroundColor:'#FFC226',drawerActiveTintColor:'#000'}}>
+      <Drawer.Screen name="솔루션 카테고리" component={Main}
+      options={{
+        headerShown:false
+      }} />
+      <Drawer.Screen name="1. 도대체 가만히 앉아있지를 못해요" component={DUMMY} />
+      <Drawer.Screen name="2. 공부를 생각한다면, 육아에서 경계해아 할 것" component={DUMMY} />
+      <Drawer.Screen name="3. 꼭 특출할 필요까지는 없어" component={DUMMY} />
+      <Drawer.Screen name="4. 공부할 때, 잡생각이 많은 아이" component={StudySolution}
+      options={{
+        headerShown:false
+      }}/>
+      <Drawer.Screen name="5. 공부는 지루하고 지겨운거야" component={DUMMY} />
+      <Drawer.Screen name="6. 늦게 숙제하려니까 힘들지 않았어?" component={DUMMY} />
+      <Drawer.Screen name="7. '최선'에 대해서 어떻게 생각하세요" component={DUMMY} />
+      <Drawer.Screen name="8. 열심히 하는 게 제일 중요해" component={DUMMY} />
+    </Drawer.Navigator>
+  );
+}
+
+const SolutionPage = ({navigation} :any) => {
+  return (
+    <NavigationContainer independent={true}>
+      <MyDrawer />
+    </NavigationContainer>
   )
 }
 
-export default SolutionCategoriesPage
+export default SolutionPage
+
+
