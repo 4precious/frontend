@@ -6,6 +6,7 @@ import getTodayInString from './utils/getTodayInString';
 import DateDisplay from './components/DateDisplay';
 import Logo from './components/Logo';
 import NotificationBell from './components/NotificationBell';
+import ChildDefaultSvg from '../assets/icons/ChildDefault.svg'
 
 const Root = (props: any) => {
   return (
@@ -91,10 +92,7 @@ const Root = (props: any) => {
               alignItems: 'center',
             }}
           >
-            <Image 
-                  source = {require('../assets/icons/ChildDefault.png')}
-                  style = {{height:260, width:200,}}
-                />
+            <ChildDefaultSvg height={260} width={200}/>
           </View>
           <Pressable
             style={{

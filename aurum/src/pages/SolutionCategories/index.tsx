@@ -52,7 +52,7 @@ export const Main = ({ navigation }:any) => {
     >
       <Header
         onPressBack={() => navigation.navigate('SolutionCategories')}
-        title='솔루션 카테고리'
+        title='육아 코칭 카테고리'
       />
       <ScrollView
         style={{
@@ -96,7 +96,7 @@ export const MyDrawer = () => {
   return (
     <Drawer.Navigator
       useLegacyImplementation screenOptions={{drawerPosition:'right', drawerActiveBackgroundColor:'#FFC226',drawerActiveTintColor:'#000'}}>
-      <Drawer.Screen name="솔루션 카테고리" component={Main}
+      <Drawer.Screen name="육아 코칭 카테고리 - 공부" component={Main}
       options={{
         headerShown:false
       }} />

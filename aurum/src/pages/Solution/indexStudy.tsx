@@ -2,6 +2,7 @@ import { StyleSheet, Alert, SafeAreaView, Text, View, Image, ScrollView } from '
 import React from 'react'
 import Header from '../Solution/Header'
 import SolutionCard from './SolutionCard'
+import StudychildSvg from '../../../assets/icons/studychild.svg';
 
 const SolutionStudy = ({ navigation }: any) => {
 
@@ -39,8 +40,7 @@ const SolutionStudy = ({ navigation }: any) => {
             alignItems: 'center',
             marginHorizontal:30,
           }}>
-          <Image source = {require('../../../assets/icons/studychild.png')} //이미지 변경 예정 (구림..)
-          style = {{width: 250, height:200}} />
+          <StudychildSvg/>
           <Text
             style={styles.title}>
             공부할 때 잡다한 생각이 많은 아이,{'\n'}어떻게 해야 좀 더 집중할 수 있을까요?

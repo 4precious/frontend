@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, View, Text, Alert, Keyboard, Pressable, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 import DateDisplay from '../../components/DateDisplay'
 import PrimaryButton from '../../components/PrimaryButton'
@@ -14,6 +14,33 @@ const QuestionPage = ({ navigation }: any) => {
   const [editable, setEditable] = useState(true)
   const [answer, setAnswer] = useState('lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies tincidunt, nunc nisl tincidunt nunc, eget aliquam nisl nisl sit amet nunc.')
   // const [answer, setAnswer] = useState('')
+  const [emotion,setEmotion] = useState('')
+
+  type ObjType = {
+    [index: string]: string
+  }
+
+  const buttonInfo : ObjType = {
+    'default':'우리 아이, 육아 코칭 살펴보기',//기본값
+    'happy':'행복한 우리 아이, 육아 코칭 살펴보기',//기쁨
+    'angry':'화가 난 우리 아이, 육아 코칭 살펴보기',//분노
+    'sad':'슬픈 우리 아이, 육아 코칭 살펴보기',//슬픔
+    'fear':'불안한 우리 아이, 육아 코칭 살펴보기',//공포
+    'surprise':'깜짝 놀란 우리 아이, 육아 코칭 살펴보기',//당황
+    'hurt':'상처받은 우리 아이, 육아 코칭 살펴보기',//상처
+  }
+  
+  const setButtonInfo=(emotion:any) =>{
+    useEffect(()=>{
+      console.log(emotion)
+      for(const emo in buttonInfo){
+        if (emotion === emo){
+          setEmotion(buttonInfo[emo])
+        }
+      }
+    },[]);    
+  }
+  setButtonInfo('default') //기본값
 
   const submit = () => {
     Alert.alert("질문 작성을 마칠까요?", "질문이 아이에게 전송됩니다.", [
@@ -107,7 +134,7 @@ const QuestionPage = ({ navigation }: any) => {
                   fontSize: 16,
                 }}
               >
-                솔루션 살펴보기
+                {emotion}
               </Text>
             </Pressable>
           </View>

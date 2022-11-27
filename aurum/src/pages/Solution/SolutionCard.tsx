@@ -1,5 +1,6 @@
 import { StyleSheet, Image, View, Text, Pressable } from 'react-native'
 import React from 'react'
+import TVSvg from '../../../assets/icons/TV.svg';
 
 const SolutionCard = ({
   onPress,
@@ -18,9 +19,9 @@ const SolutionCard = ({
           <View style = {{height:60, justifyContent:'center',marginBottom:18}}>
             {(card==='TV') 
               ?
-              <Image source = {require('../../../assets/icons/TV.png')}/>
+              <TVSvg/>
               :
-              <Image source = {require('../../../assets/icons/Diffuser.png')}/>
+              <TVSvg/>
             }
           </View>
             <Text style = {styles.title}>{title}</Text>
