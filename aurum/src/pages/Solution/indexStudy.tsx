@@ -1,4 +1,4 @@
-import { StyleSheet, Alert, SafeAreaView, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, Pressable, Alert, SafeAreaView, Text, View, Image, ScrollView } from 'react-native'
 import React from 'react'
 import Header from '../Solution/Header'
 import SolutionCard from './SolutionCard'
@@ -14,9 +14,7 @@ const SolutionStudy = ({ navigation }: any) => {
       },
       {
         text: "확인",
-        onPress: () => {
-          console.log('작동중')
-        }
+        onPress :()=>{navigation.navigate('1. 도대체 가만히 앉아있지를 못해요')}
       }
     ])
   }
@@ -77,15 +75,15 @@ const SolutionStudy = ({ navigation }: any) => {
         </Text>
         <ScrollView horizontal = {true} showsHorizontalScrollIndicator={false} style = {{height:230, marginLeft:30,}}>
             <SolutionCard 
-              onPress = {()=>{press('1번 가전 작동할까요???','TV 그만봐!!')}} 
+              onPress = {()=>{press('LG 스마트 TV','시청이 제한됩니다')}} 
               title = 'TV 시청제한'
               card = 'TV'
-              info = 'LG 스마트 TV의 시청제한 기능으로 집중력 향상'/>
+              info = 'LG 스마트 TV의 시청제한 기능으로 아이의 집중력이 향상됩니다'/>
             <SolutionCard 
-              onPress = {()=>{press('2번 가전 작동할까요???','피톤치드 칙칙')}} 
-              title = '피톤치드로 집중력 향상'
-              card = 'diffuser'
-              info = 'LG 스마트 아우라 디퓨저의 피톤치드 향으로 집중력 향상'/>
+              onPress = {()=>{press('LG 디오스 광파 오븐','요리 만들기')}} 
+              title = '집중력에 좋은 요리'
+              card = 'oven'
+              info = 'LG 디오스 광파 오븐으로 집중력에   좋은 요리를 만들어 보세요'/>
         </ScrollView>
       </ScrollView>       
     </SafeAreaView>

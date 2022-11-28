@@ -6,7 +6,7 @@ import getTodayInString from './utils/getTodayInString';
 import DateDisplay from './components/DateDisplay';
 import Logo from './components/Logo';
 import NotificationBell from './components/NotificationBell';
-import ChildDefaultSvg from '../assets/icons/ChildDefault.svg'
+import ChildDefaultSvg from '../assets/icons/ChildIcons/ChildDefault.svg'
 
 const Root = (props: any) => {
   return (

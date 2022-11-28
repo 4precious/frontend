@@ -12,6 +12,7 @@ import MonthlyViewPage from './src/pages/MonthlyView';
 import Login from './src/pages/Login';
 import AdminInfo from './src/pages/Admin/info';
 import AdminCategory from './src/pages/Admin/category';
+import Recipe from './src/pages/Solution/recipe';
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +51,10 @@ export default function App() {
           <Stack.Screen
             name="SolutionStudy"
             component={SolutionStudy}
+          />
+          <Stack.Screen
+            name="Recipe"
+            component={Recipe}
           />
           <Stack.Screen
             name="ChildRoot"
