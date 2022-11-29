@@ -1,6 +1,6 @@
 export interface Question {
-  id: number;
-  userId: number;
+  id?: number;
+  userId?: number;
   content: number;
-  createdAt: Date;
+  createdAt?: Date;
 }

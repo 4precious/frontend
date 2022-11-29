@@ -9,15 +9,16 @@ import NotificationBell from './components/NotificationBell';
 import getQuestions from './utils/getQuestions';
 import loginWithCredentials from './utils/loginWithCredentials';
 import axios from 'axios';
+import uploadQuestion from './utils/uploadQuestion';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
+axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
 
 const Root = (props: any) => {
   useEffect(() => {
-    loginWithCredentials('parent@email.me', '1234567!')
-    // getQuestions();
+    loginWithCredentials('parent2@email.me', '1234567!')
+    getQuestions();
+    uploadQuestion('test question');
   })
   return (
     <SafeAreaView style={styles.container}>
