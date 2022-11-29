@@ -5,6 +5,7 @@ import WalnutSvg from '../../../assets/icons/walnut.svg';
 import BlueberrySvg from '../../../assets/icons/blueberry.svg';
 import FishSvg from '../../../assets/icons/fish.svg';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import OvenSvg from '../../../assets/icons/oven.svg';
 
 const press = (text:string, info:string) => {
   Alert.alert(text, info, [
@@ -18,8 +19,6 @@ const press = (text:string, info:string) => {
   ])
 }
 
-
-
 const RecipeBox = ({ title, onPress, src, oven }: { title: string, onPress?: () => void , src: any, oven:string}) =>{
   return(
     <View
@@ -29,12 +28,15 @@ const RecipeBox = ({ title, onPress, src, oven }: { title: string, onPress?: () 
         {src}
       </View>
       <View style = {styles.recipeContent}>
-        <Text style={styles.recipeText}>
+        <Text style={{fontSize:16,fontWeight: '700',color:'#585858',marginBottom:15,}}>
           {title}
         </Text>
-        <Text style={styles.recipeText}>
-          {oven}
-        </Text>
+        <View style = {{flex:1, flexDirection:'row'}}>
+          <OvenSvg width={20} height={20}/>
+          <Text style={styles.recipeText}>
+            {oven}
+          </Text>
+        </View>
         <TouchableOpacity onPress = {()=>{press('오븐 예열을 시작합니다',oven)}}>
           <View style = {styles.recipeButton}>
             <Text style={styles.recipeButtonText}>오븐 예열하기</Text>
@@ -71,9 +73,9 @@ const Recipe = ({ navigation }: any) => {
         onPressBack={() => navigation.navigate('4. 공부할 때, 잡생각이 많은 아이')}
         title = '집중력에 좋은 요리'/>
         <ScrollView>
-          <RecipeBox title = "호두파이" src = {icons.walnut} oven = "170℃  35min"/>
-          <RecipeBox title = "블루베리파이" src = {icons.blueberry} oven = "210℃  20min"/>
-          <RecipeBox title = "고등어구이" src = {icons.fish} oven = "250℃  35min"/>
+          <RecipeBox title = "호두파이" src = {icons.walnut} oven = " 170℃  35min"/>
+          <RecipeBox title = "블루베리파이" src = {icons.blueberry} oven = " 210℃  20min"/>
+          <RecipeBox title = "고등어구이" src = {icons.fish} oven = " 250℃  35min"/>
         </ScrollView>
       
     </SafeAreaView>
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
     marginBottom:10,
     alignItems:'center',
     justifyContent:'center',
-    height:35,
+    height:30,
   },
   recipeButtonText:{
     fontSize:16,

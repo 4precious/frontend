@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const KeywordDisplay = () => {
+const YesterdayDisplay = () => {
   return (
     <View
       style={{
@@ -16,7 +16,7 @@ const KeywordDisplay = () => {
           fontWeight: 'bold',
         }}
       >
-        키워드
+        어제의 금쪽이
       </Text>
       <View
         style={{
@@ -24,11 +24,11 @@ const KeywordDisplay = () => {
         }}
       >
         <Text>
-          키워드가 제공될 예정입니다.
+          내일 할게요~..ㅠ
         </Text>
       </View>
     </View>
   )
 }
 
-export default KeywordDisplay
+export default YesterdayDisplay

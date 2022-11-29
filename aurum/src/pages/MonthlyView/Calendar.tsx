@@ -1,5 +1,12 @@
 import { View, Text, FlatList, Dimensions, Pressable, Alert } from 'react-native'
 import React, { useEffect } from 'react'
+import AngerSvg from '../../../assets/icons/Sentiment/anger.svg';
+import AnxietySvg from '../../../assets/icons/Sentiment/anxiety.svg';
+import EmbarrassmentSvg from '../../../assets/icons/Sentiment/embarrassment.svg';
+import HappinessSvg from '../../../assets/icons/Sentiment/happiness.svg';
+import InjurySvg from '../../../assets/icons/Sentiment/injury.svg';
+import SadnessSvg from '../../../assets/icons/Sentiment/sadness.svg';
+import DefaultSvg from '../../../assets/icons/Sentiment/default.svg'
 
 interface CalendarDateData {
   month: number,
@@ -11,6 +18,18 @@ interface CalendarDateData {
 const Calendar = () => {
   const [data, setData] = React.useState<CalendarDateData[]>([])
   const [cellSize, setCellSize] = React.useState(0)
+
+  const icons = {
+    Anger: <AngerSvg/>,
+    Anxiety : <AnxietySvg/>,
+    Happiness :<HappinessSvg/>,
+    Embarrassment : <EmbarrassmentSvg/>,
+    Injury : <InjurySvg/>,
+    Sadness : <SadnessSvg/>,
+    Default : <DefaultSvg/>
+  }
+
+  const [icon, setIcon] = React.useState(icons.Default)
 
   useEffect(() => {
     setCellSize((Dimensions.get('window').width - 72 - 6 * 4) / 7)
@@ -77,9 +96,11 @@ const Calendar = () => {
           >
             <Text
               style={{
-                fontSize: 16,
+                fontSize: 7,
+                marginRight:20,
               }}
             >{item.date}</Text>
+            {item.date ? icon : null}
           </Pressable>
         )}
         numColumns={7}

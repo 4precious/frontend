@@ -5,8 +5,8 @@ import DateDisplay from '../../components/DateDisplay'
 import PrimaryButton from '../../components/PrimaryButton'
 import AnswerDisplay from './AnswerDisplay'
 import SentimentalAnalysisResulltDisplay from '../../components/SentimentalAnalysisResulltDisplay'
-import SolutionDisplay from './KeywordDisplay'
 import QuestionDisplay from './QuestionDisplay'
+import YesterdayDisplay from './YesterdayDisplay'
  
 const QuestionPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
@@ -22,12 +22,12 @@ const QuestionPage = ({ navigation }: any) => {
 
   const buttonInfo : ObjType = {
     'default':'우리 아이, 육아 코칭 살펴보기',//기본값
-    'happy':'행복한 우리 아이, 육아 코칭 살펴보기',//기쁨
-    'angry':'화가 난 우리 아이, 육아 코칭 살펴보기',//분노
-    'sad':'슬픈 우리 아이, 육아 코칭 살펴보기',//슬픔
-    'fear':'불안한 우리 아이, 육아 코칭 살펴보기',//공포
-    'surprise':'깜짝 놀란 우리 아이, 육아 코칭 살펴보기',//당황
-    'hurt':'상처받은 우리 아이, 육아 코칭 살펴보기',//상처
+    'happiness':'행복한 우리 아이, 육아 코칭 살펴보기',//기쁨
+    'anger':'화가 난 우리 아이, 육아 코칭 살펴보기',//분노
+    'sadness':'슬픈 우리 아이, 육아 코칭 살펴보기',//슬픔
+    'anxiety':'불안한 우리 아이, 육아 코칭 살펴보기',//불안
+    'embarrassment':'깜짝 놀란 우리 아이, 육아 코칭 살펴보기',//당황
+    'injury':'상처받은 우리 아이, 육아 코칭 살펴보기',//상처
   }
   
   const setButtonInfo=(emotion:any) =>{
@@ -106,7 +106,7 @@ const QuestionPage = ({ navigation }: any) => {
         }
         {
           question.length > 0 && !typingNow && !editable && answer.length > 0 &&
-          <SolutionDisplay />
+          <YesterdayDisplay />
         }
         {
           question.length > 0 && !typingNow && !editable && answer.length > 0 &&
