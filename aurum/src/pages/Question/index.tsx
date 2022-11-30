@@ -7,6 +7,9 @@ import AnswerDisplay from './AnswerDisplay'
 import SentimentalAnalysisResulltDisplay from '../../components/SentimentalAnalysisResulltDisplay'
 import QuestionDisplay from './QuestionDisplay'
 import YesterdayDisplay from './YesterdayDisplay'
+import { Answer, Question } from '../../interfaces/text'
+import getQuestion from '../../utils/getQuestion'
+import getAnswer from '../../utils/getAnswer'
  
 //dummy (API 문서 보고 똑같이 변수 설정) 나중에 백엔드에서 가져오기!!
 const result_happiness = 0.929042;
@@ -18,13 +21,44 @@ const result_embarrassment = 0.65456;
 
 const QuestionPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
-  const [question, setQuestion] = useState('')
+  const [question, setQuestion] = useState<Question>({
+    content: '',
+    created_at: new Date(),
+    id: -1,
+    user_id: -1,
+  })
   const [editable, setEditable] = useState(true)
-  const [answer, setAnswer] = useState('lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies tincidunt, nunc nisl tincidunt nunc, eget aliquam nisl nisl sit amet nunc.')
+  const [answer, setAnswer] = useState<Answer>({
+    id: -1,
+    user_email: '',
+    question: -1,
+    content: '',
+    created_at: new Date(),
+  })
   // const [answer, setAnswer] = useState('')
   const [btninfo, setBtninfo] = useState('') //대표 감정에 따른 버튼 내용
   const [repemotion,setRepemotion] = useState('')//대표 감정
   const [repper, setRepper] = useState(0) //대표 감정의 퍼센트
+
+  useEffect(() => {(async () => {
+    const questionData = await getQuestion(
+      'parent2@email.me',
+      new Date().toISOString().split('T')[0]
+    )
+    if (questionData) {
+      setQuestion(questionData)
+    }
+  })()}, [])
+
+  useEffect(() => {(async () => {
+    if (question.id !== -1) {
+      const answerData = await getAnswer(question.id)
+      if (answerData) {
+        setAnswer(answerData)
+      }
+    }
+  })()}, [])
+
 
   type ObjType = {
     [index: string]: string
@@ -117,15 +151,18 @@ const QuestionPage = ({ navigation }: any) => {
           }}
         >
           <QuestionDisplay
-            question={question}
+            question={question.content}
             editable={editable}
             typingNow={typingNow}
             onPress={() => editable ? setTypingNow(true) : null}
             onBlur={() => setTypingNow(false)}
-            onChangeText={(text: string) => setQuestion(text)}
+            onChangeText={(text: string) => setQuestion({
+              ...question,
+              content: text
+            })}
           />
           {
-            question.length > 0 && editable &&
+            question.content.length > 0 && editable &&
             <PrimaryButton onPress={() => {
               submit()
               Keyboard.dismiss()
@@ -133,11 +170,11 @@ const QuestionPage = ({ navigation }: any) => {
           }
         </View>
         {
-          question.length > 0 && !typingNow && !editable &&
-          <AnswerDisplay answer={answer} />
+          question.content.length > 0 && !typingNow && !editable &&
+          <AnswerDisplay answer={answer.content} />
         }
         {
-          question.length > 0 && !typingNow && !editable && answer.length > 0 &&
+          question.content.length > 0 && !typingNow && !editable && answer.content.length > 0 &&
           <SentimentalAnalysisResulltDisplay 
             result_happiness={result_happiness} result_angry = {result_angry}
             result_anxiety = {result_anxiety} result_embarrassment = {result_embarrassment}
@@ -145,11 +182,11 @@ const QuestionPage = ({ navigation }: any) => {
           />
         }
         {
-          question.length > 0 && !typingNow && !editable && answer.length > 0 &&
+          question.content.length > 0 && !typingNow && !editable && answer.content.length > 0 &&
           <YesterdayDisplay repemotion = {repemotion} repper = {repper}/>
         }
         {
-          question.length > 0 && !typingNow && !editable && answer.length > 0 &&
+          question.content.length > 0 && !typingNow && !editable && answer.content.length > 0 &&
           <View
             style={{
               marginHorizontal: 36,
