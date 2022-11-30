@@ -12,9 +12,9 @@ const fetchWithAuthentication = async <R>(url: string, options: any = {}) => {
       },
       ...options,
     });
+  } else {
+    throw Error('No token in local storage');
   }
-  console.error('No token found');
-  return Promise.reject('No token found');
 }
 
 export default fetchWithAuthentication;
