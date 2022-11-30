@@ -1,10 +1,11 @@
 import {  Pressable, SafeAreaView, Text, View, ScrollView } from 'react-native'
 import React from 'react'
 import { NavigationContainer} from '@react-navigation/native';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { ChevronRight } from 'react-native-feather'
 import StudySolution from '../Solution/indexStudy'
 import Header from '../../components/Header'
+import Recipe from '../Solution/recipe';
 
 const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) => {
   return (
@@ -51,7 +52,7 @@ export const Main = ({ navigation }:any) => {
       }}
     >
       <Header
-        onPressBack={() => navigation.navigate('SolutionCategories')}
+        onPressBack={() => navigation.navigate('App',{screen: 'Question'})}
         title='육아 코칭 카테고리'
       />
       <ScrollView
@@ -96,11 +97,14 @@ export const MyDrawer = () => {
   return (
     <Drawer.Navigator
       useLegacyImplementation screenOptions={{drawerPosition:'right', drawerActiveBackgroundColor:'#FFC226',drawerActiveTintColor:'#000'}}>
-      <Drawer.Screen name="육아 코칭 카테고리 - 공부" component={Main}
+      <Drawer.Screen name="공부 육아 코칭" component={Main}
       options={{
         headerShown:false
       }} />
-      <Drawer.Screen name="1. 도대체 가만히 앉아있지를 못해요" component={DUMMY} />
+      <Drawer.Screen name="1. 도대체 가만히 앉아있지를 못해요" component={Recipe} 
+      options={{
+        headerShown:false
+      }}/>
       <Drawer.Screen name="2. 공부를 생각한다면, 육아에서 경계해아 할 것" component={DUMMY} />
       <Drawer.Screen name="3. 꼭 특출할 필요까지는 없어" component={DUMMY} />
       <Drawer.Screen name="4. 공부할 때, 잡생각이 많은 아이" component={StudySolution}
