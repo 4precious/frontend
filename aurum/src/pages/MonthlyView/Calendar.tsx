@@ -7,12 +7,17 @@ import HappinessSvg from '../../../assets/icons/Sentiment/happiness.svg';
 import InjurySvg from '../../../assets/icons/Sentiment/injury.svg';
 import SadnessSvg from '../../../assets/icons/Sentiment/sadness.svg';
 import DefaultSvg from '../../../assets/icons/Sentiment/default.svg'
+import { Answer, Question } from '../../interfaces/text';
+import getQuestion from '../../utils/getQuestion';
+import getAnswer from '../../utils/getAnswer';
 
 interface CalendarDateData {
   month: number,
   date: number | '',
   isCurrentMonth: boolean,
   isToday: boolean,
+  question: Question | null,
+  answer: Answer | null,
 }
 
 const repemotion = 'default' // 그날의 대표 감정에 따라서 바뀜
@@ -36,7 +41,7 @@ const Calendar = () => {
     setCellSize((Dimensions.get('window').width - 72 - 6 * 4) / 7)
   })
 
-  useEffect(() => {
+  useEffect(() => {(async () => {
     // set date data from current month.
     const date = new Date()
 
@@ -49,11 +54,20 @@ const Calendar = () => {
     const dateData: CalendarDateData[] = []
     for (let i = 0; i < 35; i++) {
       if (i < firstDay || i >= firstDay + daysInMonth) {
+        const question = await getQuestion(
+          'parent2@email.me',
+          `2022-${month + 1}-${i - firstDay + 1}`
+        )
+
+        const answer = await getAnswer(question.id);
+        
         dateData.push({
           month: month,
           date: '',
           isCurrentMonth: false,
           isToday: false,
+          question,
+          answer,
         })
       } else {
         dateData.push({
@@ -61,12 +75,14 @@ const Calendar = () => {
           date: i - firstDay + 1,
           isCurrentMonth: true,
           isToday: i - firstDay + 1 === date.getDate(),
+          question: null,
+          answer: null,
         })
       }
     }
 
     setData(dateData)
-  }, [])
+  })}, [])
 
   return (
     <View>
@@ -90,7 +106,7 @@ const Calendar = () => {
                 return;
               }
               if (item.isCurrentMonth) {
-                Alert.alert(`${item.month}월 ${item.date}일의 질문과 답변을 표시합니다.`)
+                Alert.alert(`${item.month}월 ${item.date}일\n${item.question?.content}\n${item.answer?.content}`);
                 return;
               }
             }}
