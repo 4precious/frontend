@@ -1,7 +1,8 @@
 import { SafeAreaView, Alert, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React, {useState} from 'react'
 import Logo from '../../components/Logo';
-import { nodeModuleNameResolver } from 'typescript';
+import ChickenSvg from '../../../assets/icons/Chicken.svg';
+import BabyChickSvg from '../../../assets/icons/Babychick.svg';
 
 const AdminCategory = (props:any) => {
     const [isSelect,setIsSelect] = useState(false);
@@ -29,11 +30,11 @@ const AdminCategory = (props:any) => {
             <Text style = {styles.category}>회원 유형 선택</Text>
             <View style = {{height:200,marginBottom:135}}>
                 <TouchableOpacity onPress = {onPress} style = {isSelect&&!parents ?styles.select :styles.categorybox}>
-                    <Image source = {require('../../../assets/icons/BabyChick.png')}/>
+                    <BabyChickSvg/>
                     <Text style = {styles.info}>자녀입니다</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress = {onPress2} style = {isSelect&&parents ?styles.select :styles.categorybox}>
-                    <Image source = {require('../../../assets/icons/Chicken.png')}/>
+                    <ChickenSvg/>
                     <Text style = {styles.info}>학부모입니다</Text>
                 </TouchableOpacity>
             </View>

@@ -4,6 +4,9 @@ import MainCard from './components/MainCard'
 import { Calendar, User } from 'react-native-feather';
 import getTodayInString from './utils/getTodayInString';
 import NotificationBell from './components/NotificationBell';
+import LoveletterSvg from '../assets/icons/loveletter.svg';
+import LeavesSvg from '../assets/icons/leaves.svg';
+import VectorSvg from '../assets/icons/vector412.svg';
 
 const ChildRoot = (props: any) => {
   const [question, setQuestion] = useState("오늘 학교 생활은 어땠어?")
@@ -132,9 +135,7 @@ const ChildRoot = (props: any) => {
                 >
                   {question}
                 </Text>
-                <Image 
-                  source = {require('../assets/icons/vector412.png')}
-                />
+                <VectorSvg/>
               </View>
               :
               <Text
@@ -143,16 +144,14 @@ const ChildRoot = (props: any) => {
               }}
               />
             }
-            <Image source=
             {question 
-              ? 
-              require('../assets/icons/loveletter.png') 
+              ?
+              <View style = {{marginBottom:40}}>
+                <LoveletterSvg/>
+              </View>
               : 
-              require('../assets/icons/leaves.png')
+              <LeavesSvg/>
             }
-            style={{
-              marginBottom: 40,
-            }}/>
           </View>
           {
             question 

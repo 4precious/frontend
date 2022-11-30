@@ -1,5 +1,7 @@
 import { StyleSheet, Image, View, Text, Pressable } from 'react-native'
 import React from 'react'
+import TVSvg from '../../../assets/icons/TV.svg';
+import OvenSvg from '../../../assets/icons/oven.svg';
 
 const SolutionCard = ({
   onPress,
@@ -15,12 +17,12 @@ const SolutionCard = ({
   return (
     <Pressable onPress={onPress}>
         <View style={styles.container}>
-          <View style = {{height:60, justifyContent:'center',marginBottom:18}}>
+          <View style = {{height:50, justifyContent:'center',marginBottom:18}}>
             {(card==='TV') 
               ?
-              <Image source = {require('../../../assets/icons/TV.png')}/>
+              <TVSvg/>
               :
-              <Image source = {require('../../../assets/icons/Diffuser.png')}/>
+              <OvenSvg/>
             }
           </View>
             <Text style = {styles.title}>{title}</Text>
@@ -46,9 +48,9 @@ const styles = StyleSheet.create({
     marginRight:20,
   },
   title:{
-    fontSize: 20, color: '#2E2E2E', fontWeight: '700', lineHeight:28,
+    fontSize: 20, color: '#2E2E2E', fontWeight: '700', lineHeight:32,
   },
   info:{
-    marginTop:6,  color: '#6E6E6E', fontSize: 14, fontWeight: '700',
+    marginTop:6,  color: '#6E6E6E', fontSize: 14, fontWeight: '700', lineHeight:18, textAlign:'center'
   }
 })

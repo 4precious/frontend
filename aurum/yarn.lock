@@ -8891,6 +8891,13 @@ react-native-picker-select@^8.0.4:
     "@react-native-picker/picker" "^1.8.3"
     lodash.isequal "^4.5.0"
 
+react-native-progress@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-5.0.0.tgz#f5ac6ceaeee27f184c660b00f29419e82a9d0ab0"
+  integrity sha512-KjnGIt3r9i5Kn2biOD9fXLJocf0bwxPRxOyAgXEnZTJQU2O+HyzgGFRCbM5h3izm9kKIkSc1txh8aGmMafCD9A==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-reanimated@^2.13.0:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.13.0.tgz#d64c1386626822d4dc22094b4efe028ff2c49cc9"
@@ -8933,10 +8940,10 @@ react-native-svg-transformer@^1.0.0:
     "@svgr/plugin-svgo" "^6.1.2"
     path-dirname "^1.0.2"
 
-react-native-svg@13.4.0:
-  version "13.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-13.4.0.tgz#82399ba0956c454144618aa581e2d748dd3f010a"
-  integrity sha512-B3TwK+H0+JuRhYPzF21AgqMt4fjhCwDZ9QUtwNstT5XcslJBXC0FoTkdZo8IEb1Sv4suSqhZwlAY6lwOv3tHag==
+react-native-svg@^13.6.0:
+  version "13.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-13.6.0.tgz#46e95a44aabbd778db7c46d8a1047da376b28058"
+  integrity sha512-1wjHCMJ8siyZbDZ0MX5wM+Jr7YOkb6GADn4/Z+/u1UwJX8WfjarypxDF3UO1ugMHa+7qor39oY+URMcrgPpiww==
   dependencies:
     css-select "^5.1.0"
     css-tree "^1.1.3"
