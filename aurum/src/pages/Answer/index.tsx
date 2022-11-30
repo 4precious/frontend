@@ -7,6 +7,14 @@ import AnswerDisplay from '../Answer/AnswerDisplay'
 import QuestionDisplay from '../Answer/QuestionDisplay'
 import SentimentalAnalysisResulltDisplay from '../../components/SentimentalAnalysisResulltDisplay'
 
+//dummy (API 문서 보고 똑같이 변수 설정) 나중에 백엔드에서 가져오기!!
+const result_happiness = 0.226;
+const result_angry = 30.95;
+const result_sadness = 5.267;
+const result_anxiety = 55.204;
+const result_injury = 7.285;
+const result_embarrassment = 1.068;
+
 const AnswerPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
   const [question, setQuestion] = useState('Q. 오늘 학교 생활은 어땠어?')
@@ -70,7 +78,11 @@ const AnswerPage = ({ navigation }: any) => {
         </View>
         {
           answer.length > 0 && !typingNow && !editable &&
-          <SentimentalAnalysisResulltDisplay />
+          <SentimentalAnalysisResulltDisplay 
+            result_happiness={result_happiness} result_angry = {result_angry}
+            result_anxiety = {result_anxiety} result_embarrassment = {result_embarrassment}
+            result_injury = {result_injury} result_sadness = {result_sadness}
+          />
         }
       </ScrollView>
     </SafeAreaView>

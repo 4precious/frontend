@@ -31,7 +31,7 @@ type ObjType = {
   sadness : <ChildSadSvg/>
  }
 
- const repemotion = 'happiness';
+ const repemotion = 'sadness';
  
  
 const Root = (props: any) => {
