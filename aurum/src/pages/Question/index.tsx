@@ -10,6 +10,7 @@ import YesterdayDisplay from './YesterdayDisplay'
 import { Answer, Question } from '../../interfaces/text'
 import getQuestion from '../../utils/getQuestion'
 import getAnswer from '../../utils/getAnswer'
+import uploadQuestion from '../../utils/uploadQuestion'
  
 //dummy (API 문서 보고 똑같이 변수 설정) 나중에 백엔드에서 가져오기!!
 const result_happiness = 0.929042;
@@ -21,20 +22,9 @@ const result_embarrassment = 0.65456;
 
 const QuestionPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
-  const [question, setQuestion] = useState<Question>({
-    content: '',
-    created_at: new Date(),
-    id: -1,
-    user_id: -1,
-  })
+  const [question, setQuestion] = useState<Question | null>(null)
   const [editable, setEditable] = useState(true)
-  const [answer, setAnswer] = useState<Answer>({
-    id: -1,
-    user_email: '',
-    question: -1,
-    content: '',
-    created_at: new Date(),
-  })
+  const [answer, setAnswer] = useState<Answer | null>(null)
   // const [answer, setAnswer] = useState('')
   const [btninfo, setBtninfo] = useState('') //대표 감정에 따른 버튼 내용
   const [repemotion,setRepemotion] = useState('')//대표 감정
@@ -51,7 +41,7 @@ const QuestionPage = ({ navigation }: any) => {
   })()}, [])
 
   useEffect(() => {(async () => {
-    if (question.id !== -1) {
+    if (question) {
       const answerData = await getAnswer(question.id)
       if (answerData) {
         setAnswer(answerData)
@@ -122,6 +112,7 @@ const QuestionPage = ({ navigation }: any) => {
         text: "확인",
         onPress: () => {
           setEditable(false)
+          uploadQuestion(question?.content)
           // navigation.navigate('Root')
         }
       }
@@ -151,18 +142,15 @@ const QuestionPage = ({ navigation }: any) => {
           }}
         >
           <QuestionDisplay
-            question={question.content}
+            question={question?.content || ''}
             editable={editable}
             typingNow={typingNow}
             onPress={() => editable ? setTypingNow(true) : null}
             onBlur={() => setTypingNow(false)}
-            onChangeText={(text: string) => setQuestion({
-              ...question,
-              content: text
-            })}
+            onChangeText={(text: string) => setQuestion({ ...(question ?? {} as any), content: text })}
           />
           {
-            question.content.length > 0 && editable &&
+            question && question.content.length > 0 && editable &&
             <PrimaryButton onPress={() => {
               submit()
               Keyboard.dismiss()
@@ -170,11 +158,11 @@ const QuestionPage = ({ navigation }: any) => {
           }
         </View>
         {
-          question.content.length > 0 && !typingNow && !editable &&
-          <AnswerDisplay answer={answer.content} />
+          question && question.content.length > 0 && !typingNow && !editable &&
+          <AnswerDisplay answer={answer?.content || ''} />
         }
         {
-          question.content.length > 0 && !typingNow && !editable && answer.content.length > 0 &&
+          question && question.content.length > 0 && !typingNow && !editable && answer && answer.content.length > 0 &&
           <SentimentalAnalysisResulltDisplay 
             result_happiness={result_happiness} result_angry = {result_angry}
             result_anxiety = {result_anxiety} result_embarrassment = {result_embarrassment}
@@ -182,11 +170,11 @@ const QuestionPage = ({ navigation }: any) => {
           />
         }
         {
-          question.content.length > 0 && !typingNow && !editable && answer.content.length > 0 &&
+          question && question.content.length > 0 && !typingNow && !editable && answer && answer.content.length > 0 &&
           <YesterdayDisplay repemotion = {repemotion} repper = {repper}/>
         }
         {
-          question.content.length > 0 && !typingNow && !editable && answer.content.length > 0 &&
+          question && question.content.length > 0 && !typingNow && !editable && answer && answer.content.length > 0 &&
           <View
             style={{
               marginHorizontal: 36,

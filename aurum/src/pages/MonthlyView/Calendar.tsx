@@ -54,35 +54,49 @@ const Calendar = () => {
     const dateData: CalendarDateData[] = []
     for (let i = 0; i < 35; i++) {
       if (i < firstDay || i >= firstDay + daysInMonth) {
-        const question = await getQuestion(
-          'parent2@email.me',
-          `2022-${month + 1}-${i - firstDay + 1}`
-        )
-
-        const answer = await getAnswer(question.id);
         
         dateData.push({
           month: month,
           date: '',
           isCurrentMonth: false,
           isToday: false,
-          question,
-          answer,
+          question: null,
+          answer: null,
         })
       } else {
+
+        console.log(`2022-${month + 1}-${(i - firstDay + 1).toString().padStart(2, '0')}`)
+        const question = await getQuestion(
+          'parent2@email.me',
+          `2022-${month + 1}-${(i - firstDay + 1).toString().padStart(2, '0')}`
+        )
+        if (!question || (question && question.content.length === 0)) {
+          console.error('No question data')
+          dateData.push({
+            month: month,
+            date: i - firstDay + 1,
+            isCurrentMonth: true,
+            isToday: i - firstDay + 1 === date.getDate(),
+            question: null,
+            answer: null,
+          })
+          continue;
+        }
+
+        const answer = await getAnswer(question.id);
         dateData.push({
           month: month,
           date: i - firstDay + 1,
           isCurrentMonth: true,
           isToday: i - firstDay + 1 === date.getDate(),
-          question: null,
-          answer: null,
+          question,
+          answer,
         })
       }
     }
 
     setData(dateData)
-  })}, [])
+  })()}, [])
 
   return (
     <View>

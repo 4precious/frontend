@@ -19,6 +19,7 @@ import uploadQuestion from './utils/uploadQuestion';
 import { Answer, Question } from './interfaces/text';
 import getAnswer from './utils/getAnswer';
 import getQuestion from './utils/getQuestion';
+import isLogin from './utils/isLogin';
 
 type ObjType = {
   [index: string]: any
@@ -33,26 +34,27 @@ type ObjType = {
   injury : <ChildSadSvg/>,
   sadness : <ChildSadSvg/>
  }
+
  
 const Root = (props: any) => {
-  // useEffect(() => {
-  //   loginWithCredentials('parent2@email.me', '1234567!')
-  //   getQuestions();
-  //   uploadQuestion('test question');
-  // })
-
   const [question, setQuestion] = useState<Question | null>(null);
   const [answer, setAnswer] = useState<Answer | null>(null);
-
   const [repemotion, setRepemotion] = useState<string>('default');
+  const [isLogined, setIsLogined] = useState<boolean>(false);
+
+  useEffect(() => {(async () => {
+    await loginWithCredentials('parent2@email.me', '1234567!');
+    setIsLogined(true);
+  })()},[]);
 
   useEffect(() => {(async () => {
     const questionData = await getQuestion(
       'parent2@email.me',
       new Date().toISOString().split('T')[0]
     )
-    if (!questionData || questionData.content.length === 0) {
-      console.error('No question data')
+    console.log(questionData)
+    if (!questionData || questionData?.content?.length === 0) {
+      console.warn('No question data')
       return;
     }
     setQuestion(questionData);
@@ -62,7 +64,7 @@ const Root = (props: any) => {
     if (question) {
       const answerData = await getAnswer(question.id)
       if (!answerData) {
-        console.error('No answer data')
+        console.warn('No answer data')
         return;
       }
       setAnswer(answerData)
