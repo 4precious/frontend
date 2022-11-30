@@ -1,15 +1,21 @@
 import { StyleSheet, SafeAreaView, Text, Button, Image, View, Pressable } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import MainCard from './components/MainCard'
 import { Bell, Calendar, User } from 'react-native-feather';
 import getTodayInString from './utils/getTodayInString';
 import DateDisplay from './components/DateDisplay';
 import Logo from './components/Logo';
 import NotificationBell from './components/NotificationBell';
+
 import ChildDefaultSvg from '../assets/icons/ChildIcons/ChildDefault.svg';
 import ChildAngrySvg from '../assets/icons/ChildIcons/ChildAngry.svg';
 import ChildHappySvg from '../assets/icons/ChildIcons/ChildHappiness.svg';
 import ChildSadSvg from '../assets/icons/ChildIcons/ChildSad.svg';
+
+import getQuestions from './utils/getQuestions';
+import loginWithCredentials from './utils/loginWithCredentials';
+import axios from 'axios';
+import uploadQuestion from './utils/uploadQuestion';
 
 type ObjType = {
   [index: string]: any
@@ -29,6 +35,11 @@ type ObjType = {
  
  
 const Root = (props: any) => {
+  useEffect(() => {
+    loginWithCredentials('parent2@email.me', '1234567!')
+    getQuestions();
+    uploadQuestion('test question');
+  })
   return (
     <SafeAreaView style={styles.container}>
       <View style={{
