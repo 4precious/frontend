@@ -13,19 +13,8 @@ import getAnswer from '../../utils/getAnswer'
 
 const AnswerPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
-  const [question, setQuestion] = useState<Question>({
-    content: 'Q. 오늘 학교 생활은 어땠어?',
-    created_at: new Date(),
-    id: -1,
-    user_id: -1,
-  })
-  const [answer, setAnswer] = useState<Answer>({
-    id: -1,
-    user_email: '',
-    question: -1,
-    content: '',
-    created_at: new Date(),
-  })
+  const [question, setQuestion] = useState<Question | null>(null)
+  const [answer, setAnswer] = useState<Answer | null>(null)
 
   const [editable, setEditable] = useState(true)
 
@@ -38,9 +27,11 @@ const AnswerPage = ({ navigation }: any) => {
   })()}, [])
 
   useEffect(() => {(async () => {
-    const answerData = await getAnswer(question.id)
-    setAnswer(answerData)
-  })()}, [answer])
+    if (question) {
+      const answerData = await getAnswer(question.id)
+      setAnswer(answerData)
+    }
+  })()}, [])
 
   const submit = () => {
     Alert.alert("답변 작성을 마칠까요?", "답변이 부모님께 전송됩니다.", [
@@ -50,14 +41,16 @@ const AnswerPage = ({ navigation }: any) => {
       },
       {
         text: "확인",
-        onPress: () => {
+        onPress: async () => {
           setEditable(false)
-
-          uploadAnswer({
-            questionId: question.id,
-            content: answer.content,
-          })
-          navigation.navigate('Root')
+          if (question && answer) {
+            await uploadAnswer({
+              questionId: question.id,
+              content: answer.content,
+            })
+            console.log('uploaded');
+            navigation.navigate('Root')
+          }
         }
       }
     ])
@@ -85,20 +78,20 @@ const AnswerPage = ({ navigation }: any) => {
             paddingHorizontal: 36,
           }}
         >
-          <QuestionDisplay question={question}></QuestionDisplay>
+          <QuestionDisplay question={question?.content || ''}></QuestionDisplay>
           <AnswerDisplay
-            answer={answer.content}
+            answer={answer?.content || ''}
             editable={editable}
             typingNow={typingNow}
             onPress={() => editable ? setTypingNow(true) : null}
             onBlur={() => setTypingNow(false)}
             onChangeText={(text: string) => setAnswer({
-              ...answer,
+              ...(answer ?? {} as any),
               content: text,
             })}
           />
           {
-            answer.content.length > 0 && editable &&
+            answer && answer.content.length > 0 && editable &&
             <PrimaryButton onPress={() => {
               submit()
               Keyboard.dismiss()
@@ -106,7 +99,7 @@ const AnswerPage = ({ navigation }: any) => {
           }
         </View>
         {
-          answer.content.length > 0 && !typingNow && !editable &&
+          answer && answer.content.length > 0 && !typingNow && !editable &&
           <SentimentalAnalysisResulltDisplay 
             result_happiness={answer.result_hapiness ?? 0}
             result_sadness={answer.result_sadness ?? 0}

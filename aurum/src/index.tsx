@@ -43,7 +43,7 @@ const Root = (props: any) => {
   const [isLogined, setIsLogined] = useState<boolean>(false);
 
   useEffect(() => {(async () => {
-    await loginWithCredentials('parent2@email.me', '1234567!');
+    await loginWithCredentials('child@email.me', '1234567!');
     setIsLogined(true);
   })()},[]);
 

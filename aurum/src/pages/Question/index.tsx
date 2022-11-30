@@ -112,7 +112,7 @@ const QuestionPage = ({ navigation }: any) => {
         text: "확인",
         onPress: () => {
           setEditable(false)
-          uploadQuestion(question?.content)
+          uploadQuestion(question?.content || '')
           // navigation.navigate('Root')
         }
       }
