@@ -1,7 +1,7 @@
 export interface Question {
   id: number;
   user_id: number;
-  content: number;
+  content: string;
   created_at: Date;
 }
 
