@@ -15,21 +15,22 @@ interface CalendarDateData {
   isToday: boolean,
 }
 
+const repemotion = 'default' // 그날의 대표 감정에 따라서 바뀜
+
 const Calendar = () => {
   const [data, setData] = React.useState<CalendarDateData[]>([])
   const [cellSize, setCellSize] = React.useState(0)
 
   const icons = {
-    Anger: <AngerSvg/>,
-    Anxiety : <AnxietySvg/>,
-    Happiness :<HappinessSvg/>,
-    Embarrassment : <EmbarrassmentSvg/>,
-    Injury : <InjurySvg/>,
-    Sadness : <SadnessSvg/>,
-    Default : <DefaultSvg/>
+    angry: <AngerSvg/>,
+    anxiety : <AnxietySvg/>,
+    happiness :<HappinessSvg/>,
+    embarrassment : <EmbarrassmentSvg/>,
+    injury : <InjurySvg/>,
+    sadness : <SadnessSvg/>,
+    default : <DefaultSvg/>
   }
 
-  const [icon, setIcon] = React.useState(icons.Default)
 
   useEffect(() => {
     setCellSize((Dimensions.get('window').width - 72 - 6 * 4) / 7)
@@ -100,7 +101,7 @@ const Calendar = () => {
                 marginRight:20,
               }}
             >{item.date}</Text>
-            {item.date ? icon : null}
+            {item.date ? icons[repemotion] : null}
           </Pressable>
         )}
         numColumns={7}

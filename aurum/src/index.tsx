@@ -6,8 +6,28 @@ import getTodayInString from './utils/getTodayInString';
 import DateDisplay from './components/DateDisplay';
 import Logo from './components/Logo';
 import NotificationBell from './components/NotificationBell';
-import ChildDefaultSvg from '../assets/icons/ChildIcons/ChildDefault.svg'
+import ChildDefaultSvg from '../assets/icons/ChildIcons/ChildDefault.svg';
+import ChildAngrySvg from '../assets/icons/ChildIcons/ChildAngry.svg';
+import ChildHappySvg from '../assets/icons/ChildIcons/ChildHappiness.svg';
+import ChildSadSvg from '../assets/icons/ChildIcons/ChildSad.svg';
 
+type ObjType = {
+  [index: string]: any
+  }
+ 
+ const icons : ObjType = {
+  default: <ChildDefaultSvg/>,//기본값
+  angry : <ChildAngrySvg/>,
+  anxiety : <ChildDefaultSvg/>,//사진 없음
+  happiness :<ChildHappySvg/>,
+  embarrassment : <ChildDefaultSvg/>,//사진 없음
+  injury : <ChildSadSvg/>,
+  sadness : <ChildSadSvg/>
+ }
+
+ const repemotion = 'happiness';
+ 
+ 
 const Root = (props: any) => {
   return (
     <SafeAreaView style={styles.container}>
@@ -92,7 +112,7 @@ const Root = (props: any) => {
               alignItems: 'center',
             }}
           >
-            <ChildDefaultSvg height={260} width={200}/>
+            {icons[repemotion]}
           </View>
           <Pressable
             style={{

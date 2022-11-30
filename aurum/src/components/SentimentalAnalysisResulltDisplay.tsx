@@ -9,14 +9,6 @@ import InjurySvg from '../../assets/icons/Sentiment/injury.svg';
 import SadnessSvg from '../../assets/icons/Sentiment/sadness.svg';
  
 
-//dummy
- const result_happiness = 0.9342;
- const result_angry = 0.1534;
- const result_sadness = 0.234535;
- const result_anxiety = 0.51234;
- const result_injury = 0.33445;
- const result_embarrassment = 0.65456;
- ///
  type ObjType = {
   [index: string]: any
   }
@@ -40,7 +32,20 @@ const SentimentResult = ({per, src}:{per:any, src:any}) =>{
   )
 }
 
-const SentimentalAnalysisResulltDisplay = () => {
+const SentimentalAnalysisResulltDisplay = ({
+  result_happiness,
+  result_angry,
+  result_anxiety,
+  result_embarrassment,
+  result_injury,
+  result_sadness}
+  :{ result_happiness : number,
+    result_angry : number,
+    result_anxiety : number,
+    result_embarrassment : number,
+    result_injury : number,
+    result_sadness : number
+  }) => {
   const [emotion1, setEmotion1] = useState('');
   const [emotion2, setEmotion2] = useState('');
   const [emotion3, setEmotion3] = useState('');
