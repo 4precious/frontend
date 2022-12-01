@@ -44,7 +44,8 @@ const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) =>
   )
 }
 
-export const Main = ({ navigation }:any) => {
+export const Main = ({ route }: any) => {
+  const props = route.params
   return (
     <SafeAreaView
       style={{
@@ -53,7 +54,7 @@ export const Main = ({ navigation }:any) => {
       }}
     >
       <Header
-        onPressBack={() => navigation.navigate('App',{screen: 'Question'})}
+        onPressBack={() => props.navigation2.navigate('Question')}
         title='육아 코칭 카테고리'
       />
       <ScrollView
@@ -63,7 +64,7 @@ export const Main = ({ navigation }:any) => {
         }}
       >
         <ItemBox
-          onPress={() => navigation.openDrawer()}
+          onPress={() => props.navigation.openDrawer()}
           title='공부'
         />
         <ItemBox
@@ -94,14 +95,18 @@ export const DUMMY = ()=> {
 
 const Drawer = createDrawerNavigator();
 
-export const MyDrawer = () => {
+export const MyDrawer = (props: any) => {
   return (
     <Drawer.Navigator
       useLegacyImplementation screenOptions={{drawerPosition:'right', drawerActiveBackgroundColor:'#FFC226',drawerActiveTintColor:'#000'}}>
       <Drawer.Screen name="공부 육아 코칭" component={Main}
       options={{
         headerShown:false
-      }} />
+      }}
+      initialParams={{
+        navigation2: props.navigation
+      }}
+      />
       <Drawer.Screen name="1. 도대체 가만히 앉아있지를 못해요" component={Recipe} 
       options={{
         headerShown:false
@@ -123,10 +128,10 @@ export const MyDrawer = () => {
   );
 }
 
-const SolutionPage = ({navigation} :any) => {
+const SolutionPage = (props :any) => {
   return (
     <NavigationContainer independent={true}>
-      <MyDrawer />
+      <MyDrawer {...props}/>
     </NavigationContainer>
   )
 }

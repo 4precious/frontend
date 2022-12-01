@@ -57,7 +57,13 @@ const YesterdayInfo :ObjType2 = {
 }
 
 
-const YesterdayDisplay = ({repemotion, repper}:{repemotion:string, repper:number}) => {
+const YesterdayDisplay = ({
+  repemotion,
+  repper
+}:{
+  repemotion:string,
+  repper:number
+}) => {
 
   return (
     <View
