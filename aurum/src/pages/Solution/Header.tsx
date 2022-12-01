@@ -2,6 +2,7 @@ import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { ChevronLeft } from 'react-native-feather'
 import Speaker from './Speaker'
+import TodaySolution from './TodaySolution'
 
 const Header = ({
   onPressBack,
@@ -38,6 +39,7 @@ const Header = ({
         </Text>
       </View>
       <Speaker/>
+      <TodaySolution/>
     </View>
   )
 }

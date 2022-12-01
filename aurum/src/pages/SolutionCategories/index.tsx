@@ -6,6 +6,7 @@ import { ChevronRight } from 'react-native-feather'
 import StudySolution from '../Solution/indexStudy'
 import Header from '../../components/Header'
 import Recipe from '../Solution/recipe';
+import RecipeDetail from '../Solution/RecipeDetail';
 
 const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) => {
   return (
@@ -105,7 +106,10 @@ export const MyDrawer = () => {
       options={{
         headerShown:false
       }}/>
-      <Drawer.Screen name="2. 공부를 생각한다면, 육아에서 경계해아 할 것" component={DUMMY} />
+      <Drawer.Screen name="2. 공부를 생각한다면, 육아에서 경계해아 할 것" component={RecipeDetail}
+      options={{
+        headerShown:false
+      }} />
       <Drawer.Screen name="3. 꼭 특출할 필요까지는 없어" component={DUMMY} />
       <Drawer.Screen name="4. 공부할 때, 잡생각이 많은 아이" component={StudySolution}
       options={{
