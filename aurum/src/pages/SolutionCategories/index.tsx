@@ -44,7 +44,7 @@ const ItemBox = ({ title, onPress }: { title: string, onPress?: () => void }) =>
   )
 }
 
-export const Main = ({ route }: any) => {
+export const Main = ({ route, navigation }: any) => {
   const props = route.params
   return (
     <SafeAreaView
@@ -64,7 +64,7 @@ export const Main = ({ route }: any) => {
         }}
       >
         <ItemBox
-          onPress={() => props.navigation.openDrawer()}
+          onPress={() => navigation.openDrawer()}
           title='공부'
         />
         <ItemBox
