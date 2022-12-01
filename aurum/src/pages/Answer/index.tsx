@@ -11,14 +11,6 @@ import { Answer, Question } from '../../interfaces/text'
 import getQuestion from '../../utils/getQuestion'
 import getAnswer from '../../utils/getAnswer'
 
-//dummy (API 문서 보고 똑같이 변수 설정) 나중에 백엔드에서 가져오기!!
-const result_happiness = 0.226;
-const result_angry = 30.95;
-const result_sadness = 5.267;
-const result_anxiety = 55.204;
-const result_injury = 7.285;
-const result_embarrassment = 1.068;
-
 const AnswerPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
   const [question, setQuestion] = useState<Question | null>(null)
@@ -38,6 +30,7 @@ const AnswerPage = ({ navigation }: any) => {
     if (question) {
       const answerData = await getAnswer(question.id)
       setAnswer(answerData)
+      setEditable(false)
     }
   })()}, [question])
 

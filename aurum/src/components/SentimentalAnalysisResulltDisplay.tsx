@@ -26,8 +26,8 @@ const SentimentResult = ({per, src}:{per: number, src:any}) =>{
   return(
     <View style={{marginTop: 16, flex:1, flexDirection:'row', alignItems:'center',}}>
         <View style = {{marginRight:20}}>{src}</View>
-        <View style = {{marginRight:20}}><Progress.Bar width={210} progress={per/100}  color={'#FFC226'}/></View>
-        <View><Text style = {{color:'#FFC226'}}>{parseFloat(per.toFixed(1))}%</Text></View>
+        <View style = {{marginRight:20}}><Progress.Bar width={210} progress={per / 100}  color={'#FFC226'}/></View>
+        <View><Text style = {{color:'#FFC226'}}>{parseFloat((per).toFixed(1))}%</Text></View>
     </View>
   )
 }
@@ -38,7 +38,8 @@ const SentimentalAnalysisResulltDisplay = ({
   result_anxiety,
   result_embarrassment,
   result_injury,
-  result_sadness}
+  result_sadness,
+}
   :{ result_happiness : number,
     result_angry : number,
     result_anxiety : number,

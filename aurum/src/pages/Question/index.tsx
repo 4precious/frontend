@@ -162,14 +162,14 @@ const QuestionPage = ({ navigation }: any) => {
           <AnswerDisplay answer={answer?.content || ''} />
         }
         {
-          question && question.content.length > 0 && !typingNow && !editable && answer && answer.content.length > 0 &&
+          question && question.content.length > 0 && answer && answer.content.length > 0 &&
           <SentimentalAnalysisResulltDisplay 
-            result_happiness = {emotions.happiness / 100}
-            result_angry = {emotions.angry / 100}
-            result_anxiety = {emotions.anxiety / 100}
-            result_embarrassment = {emotions.embarrassment / 100}
-            result_injury = {emotions.injury / 100}
-            result_sadness = {emotions.sadness / 100}
+            result_happiness = {answer.result_happiness ?? 0}
+            result_angry = {answer.result_anger ?? 0}
+            result_anxiety = {answer.result_anxiety ?? 0}
+            result_embarrassment = {answer.result_embarrassment ?? 0}
+            result_injury = {answer.result_injury ?? 0}
+            result_sadness = {answer.result_sadness ?? 0}
           />
         }
         {
