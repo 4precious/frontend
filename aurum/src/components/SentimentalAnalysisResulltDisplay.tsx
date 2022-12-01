@@ -22,7 +22,7 @@ import SadnessSvg from '../../assets/icons/Sentiment/sadness.svg';
   sadness : <SadnessSvg/>
 }
 
-const SentimentResult = ({per, src}:{per:any, src:any}) =>{
+const SentimentResult = ({per, src}:{per: number, src:any}) =>{
   return(
     <View style={{marginTop: 16, flex:1, flexDirection:'row', alignItems:'center',}}>
         <View style = {{marginRight:20}}>{src}</View>
@@ -53,7 +53,8 @@ const SentimentalAnalysisResulltDisplay = ({
   const [per2, setPer2] = useState(0);
   const [per3, setPer3] = useState(0);
 
-  const TopEmotion = () =>{
+  useEffect(() =>{
+    console.log(1)
     const result = {
       angry: result_angry,
       anxiety: result_anxiety,
@@ -72,19 +73,14 @@ const SentimentalAnalysisResulltDisplay = ({
       toppercent.push(element[1])
     }
 
-    useEffect(()=>{
-      setEmotion1(topemotion[0])
-      setEmotion2(topemotion[1])
-      setEmotion3(topemotion[2])
-      setPer1(toppercent[0])
-      setPer2(toppercent[1])
-      setPer3(toppercent[2])
-    },[]);
-  }
-  
-  TopEmotion()
-  //console.log(emotion1,emotion2,emotion3) : hapiness embarrassment anxiety
-  //console.log(per1,per2,per3) : 0.9342 0.65456 0.51234
+
+    setEmotion1(topemotion[0])
+    setEmotion2(topemotion[1])
+    setEmotion3(topemotion[2])
+    setPer1(toppercent[0])
+    setPer2(toppercent[1])
+    setPer3(toppercent[2])
+  }, [])
 
   return (
     <View

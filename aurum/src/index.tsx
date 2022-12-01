@@ -43,7 +43,7 @@ const Root = (props: any) => {
   const [isLogined, setIsLogined] = useState<boolean>(false);
 
   useEffect(() => {(async () => {
-    await loginWithCredentials('child@email.me', '1234567!');
+    await loginWithCredentials('parent2@email.me', '1234567!');
     setIsLogined(true);
   })()},[]);
 
@@ -78,7 +78,7 @@ const Root = (props: any) => {
       } = {
         angry : answer.result_anger ?? 0,
         anxiety : answer.result_anxiety ?? 0,
-        happiness : answer.result_hapiness ?? 0,
+        happiness : answer.result_happiness ?? 0,
         embarrassment : answer.result_embarrassment ?? 0,
         injury : answer.result_injury ?? 0,
         sadness : answer.result_sadness ?? 0,

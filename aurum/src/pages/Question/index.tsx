@@ -13,12 +13,6 @@ import getAnswer from '../../utils/getAnswer'
 import uploadQuestion from '../../utils/uploadQuestion'
  
 //dummy (API 문서 보고 똑같이 변수 설정) 나중에 백엔드에서 가져오기!!
-const result_happiness = 0.929042;
-const result_angry = 0.1534;
-const result_sadness = 0.234535;
-const result_anxiety = 0.51234;
-const result_injury = 0.33445;
-const result_embarrassment = 0.65456;
 
 const QuestionPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
@@ -29,6 +23,14 @@ const QuestionPage = ({ navigation }: any) => {
   const [btninfo, setBtninfo] = useState('') //대표 감정에 따른 버튼 내용
   const [repemotion,setRepemotion] = useState('')//대표 감정
   const [repper, setRepper] = useState(0) //대표 감정의 퍼센트
+  const [emotions, setEmotions] = useState({
+    happiness: 0,
+    angry: 0,
+    sadness: 0,
+    anxiety: 0,
+    injury: 0,
+    embarrassment: 0,
+  }) //감정들
 
   useEffect(() => {(async () => {
     const questionData = await getQuestion(
@@ -48,7 +50,21 @@ const QuestionPage = ({ navigation }: any) => {
         setAnswer(answerData)
       }
     }
-  })()}, [])
+  })()}, [question])
+
+  useEffect(() => {
+    if (answer) {
+      console.log(answer)
+      setEmotions({
+        happiness: answer.result_happiness ?? -1,
+        angry: answer.result_anger ?? -1,
+        sadness: answer.result_sadness ?? -1,
+        anxiety: answer.result_anxiety ?? -1,
+        injury: answer.result_injury ?? -1,
+        embarrassment: answer.result_embarrassment ?? -1,
+      })
+    }
+  }, [answer])
 
 
   type ObjType = {
@@ -66,42 +82,27 @@ const QuestionPage = ({ navigation }: any) => {
     'injury':'상처받은 우리 아이, 육아 코칭 살펴보기',//상처
   }
   
-  const setButtonInfo=(repemotion:any) =>{
-    useEffect(()=>{
-      for(const emo in buttonInfo){
-        if (repemotion === emo){
-          setBtninfo(buttonInfo[emo])
-        }
+  useEffect(() => {
+    for(const emo in buttonInfo){
+      if (repemotion === emo){
+        setBtninfo(buttonInfo[emo])
       }
-    },[repemotion]);    
-  }
-  setButtonInfo(repemotion) //기본값
+    }
+  }, [repemotion, buttonInfo])
   
-  const SelectRepEmotion = () =>{
-    const result = {
-      angry: result_angry,
-      anxiety: result_anxiety,
-      embarrassment: result_embarrassment,
-      happiness: result_happiness,
-      injury:result_injury,
-      sadness:result_sadness
-    };
-
-      const sorted =Object.entries(result).sort((a, b) => b[1] - a[1]);
-      var topemotion:any = []
-      var toppercent:any = []
-
+  useEffect(() => {
+    const sorted = Object.entries(emotions).sort((a, b) => b[1] - a[1]);
+    let topemotion: any = []
+    let toppercent: any = []
+  
     for(let element of sorted) {
       topemotion.push(element[0])
       toppercent.push(element[1])
     }
-    useEffect(()=>{
-      setRepemotion(topemotion[0])
-      setRepper(toppercent[0])
-    },[]);
-  }
 
-  SelectRepEmotion()
+    setRepemotion(topemotion[0])
+    setRepper(toppercent[0])
+  }, [emotions])
 
   const submit = () => {
     Alert.alert("질문 작성을 마칠까요?", "질문이 아이에게 전송됩니다.", [
@@ -165,9 +166,12 @@ const QuestionPage = ({ navigation }: any) => {
         {
           question && question.content.length > 0 && !typingNow && !editable && answer && answer.content.length > 0 &&
           <SentimentalAnalysisResulltDisplay 
-            result_happiness={result_happiness} result_angry = {result_angry}
-            result_anxiety = {result_anxiety} result_embarrassment = {result_embarrassment}
-            result_injury = {result_injury} result_sadness = {result_sadness}
+            result_happiness = {emotions.happiness / 100}
+            result_angry = {emotions.angry / 100}
+            result_anxiety = {emotions.anxiety / 100}
+            result_embarrassment = {emotions.embarrassment / 100}
+            result_injury = {emotions.injury / 100}
+            result_sadness = {emotions.sadness / 100}
           />
         }
         {

@@ -31,7 +31,7 @@ const AnswerPage = ({ navigation }: any) => {
       const answerData = await getAnswer(question.id)
       setAnswer(answerData)
     }
-  })()}, [])
+  })()}, [question])
 
   const submit = () => {
     Alert.alert("답변 작성을 마칠까요?", "답변이 부모님께 전송됩니다.", [
@@ -101,7 +101,7 @@ const AnswerPage = ({ navigation }: any) => {
         {
           answer && answer.content.length > 0 && !typingNow && !editable &&
           <SentimentalAnalysisResulltDisplay 
-            result_happiness={answer.result_hapiness ?? 0}
+            result_happiness={answer.result_happiness ?? 0}
             result_sadness={answer.result_sadness ?? 0}
             result_anxiety={answer.result_anxiety ?? 0}
             result_angry={answer.result_anger ?? 0}

@@ -11,7 +11,7 @@ export interface Answer {
   question: number; // questionID
   content: string;
   created_at: Date;
-  result_hapiness?: number;
+  result_happiness?: number;
   result_anxiety?: number;
   result_embarrassment?: number;
   result_sadness?: number;
