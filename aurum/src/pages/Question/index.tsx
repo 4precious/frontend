@@ -37,6 +37,7 @@ const QuestionPage = ({ navigation }: any) => {
     )
     if (questionData) {
       setQuestion(questionData)
+      setEditable(false)
     }
   })()}, [])
 
