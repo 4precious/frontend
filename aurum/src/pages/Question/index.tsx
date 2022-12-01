@@ -12,8 +12,6 @@ import getQuestion from '../../utils/getQuestion'
 import getAnswer from '../../utils/getAnswer'
 import uploadQuestion from '../../utils/uploadQuestion'
  
-//dummy (API 문서 보고 똑같이 변수 설정) 나중에 백엔드에서 가져오기!!
-
 const QuestionPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
   const [question, setQuestion] = useState<Question | null>(null)

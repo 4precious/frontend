@@ -13,6 +13,7 @@ import Login from './src/pages/Login';
 import AdminInfo from './src/pages/Admin/info';
 import AdminCategory from './src/pages/Admin/category';
 import Recipe from './src/pages/Solution/recipe';
+import RecipeDetail from './src/pages/Solution/RecipeDetail'
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +56,10 @@ export default function App() {
           <Stack.Screen
             name="Recipe"
             component={Recipe}
+          />
+          <Stack.Screen
+            name="RecipeDetail"
+            component={RecipeDetail}
           />
           <Stack.Screen
             name="ChildRoot"

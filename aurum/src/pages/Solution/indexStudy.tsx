@@ -64,7 +64,7 @@ const SolutionStudy = ({ navigation }: any) => {
             <Text style = {styles.highlight}>아이가 공부한다고 앉으면 부모는 전화통화나 TV를 보는 것도 삼가는 것이 좋아요</Text>{'\n'}{'\n'}
             아이가 주변을 정리한다음, 공부를 시작할 때는 부모가 간단하게는 공부할 내용의 개요와 단계를 설명해주세요. 
             뭘 하기 위해 책상 위에 앉은 것인지 확인시키는 것이죠. <Text style = {styles.highlight}>아이에게 단기목표를 설정해 주는 겁니다. </Text>
-            이렇듯 자신이 할 일의 분량과 시간들을 명확하게 정하면 잡생각이 좀 덜 떠오릅니다.{'\n'}{'\n'}
+            이렇듯 자신이 할 일의 분량과 시간들을 명확하게 정하면 잡생각이 좀 덜 떠오릅니다.{'\n'}
           </Text>
         </View>
         <Text style = {{fontSize: 15, color: '#FFC226', fontWeight: '700', lineHeight:28, marginLeft:30, }}>

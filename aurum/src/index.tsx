@@ -34,7 +34,6 @@ type ObjType = {
   injury : <ChildSadSvg/>,
   sadness : <ChildSadSvg/>
  }
-
  
 const Root = (props: any) => {
   const [question, setQuestion] = useState<Question | null>(null);
