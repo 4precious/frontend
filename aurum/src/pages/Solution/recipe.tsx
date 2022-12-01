@@ -19,7 +19,7 @@ const press = (text:string, info:string) => {
   ])
 }
 
-const RecipeBox = ({ title, onPress, src, oven }: { title: string, onPress?: () => void , src: any, oven:string}) =>{
+const RecipeBox = ({ navigation, title, onPress, src, oven }: { navigation:any, title: string, onPress?: () => void , src: any, oven:string}) =>{
   return(
     <View
       style={styles.recipeBox}
@@ -42,7 +42,7 @@ const RecipeBox = ({ title, onPress, src, oven }: { title: string, onPress?: () 
             <Text style={styles.recipeButtonText}>오븐 예열하기</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress = {()=>navigation.navigate('2. 공부를 생각한다면, 육아에서 경계해아 할 것')}>
           <View style = {styles.recipeButton}>
             <Text style={styles.recipeButtonText}>
               레시피 보러가기
@@ -73,9 +73,9 @@ const Recipe = ({ navigation }: any) => {
         onPressBack={() => navigation.navigate('4. 공부할 때, 잡생각이 많은 아이')}
         title = '집중력에 좋은 요리'/>
         <ScrollView>
-          <RecipeBox title = "호두파이" src = {icons.walnut} oven = " 170℃  35min"/>
-          <RecipeBox title = "블루베리파이" src = {icons.blueberry} oven = " 210℃  20min"/>
-          <RecipeBox title = "고등어구이" src = {icons.fish} oven = " 250℃  35min"/>
+          <RecipeBox title = "호두파이" navigation = {navigation} src = {icons.walnut} oven = " 170℃  35min"/>
+          <RecipeBox title = "블루베리파이" navigation = {navigation} src = {icons.blueberry} oven = " 210℃  20min"/>
+          <RecipeBox title = "고등어구이" navigation = {navigation} src = {icons.fish} oven = " 250℃  35min"/>
         </ScrollView>
       
     </SafeAreaView>
