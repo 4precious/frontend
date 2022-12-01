@@ -36,7 +36,7 @@ const MonthDisplay = ({ size }: { size: number }) => {
             fontFamily: 'Poppins-Regular',
           }}
         >
-          NOV
+          DEC
         </Text>
       </View>
     )

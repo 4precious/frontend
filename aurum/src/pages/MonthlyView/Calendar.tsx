@@ -73,7 +73,6 @@ const Calendar = () => {
           `2022-${month + 1}-${(i - firstDay + 1).toString().padStart(2, '0')}`
         )
         if (!question || (question && question.content.length === 0)) {
-          console.error('No question data')
           dateData.push({
             month: month,
             date: i - firstDay + 1,
@@ -134,7 +133,7 @@ const Calendar = () => {
                 return;
               }
               if (item.isCurrentMonth) {
-                Alert.alert(`${item.month}월 ${item.date}일\n${item.question?.content}\n${item.answer?.content}`);
+                Alert.alert(`${item.month}월 ${item.date}일\nQ. ${item.question?.content}\nA. ${item.answer?.content}`);
                 return;
               }
             }}
@@ -145,7 +144,7 @@ const Calendar = () => {
                 marginRight:20,
               }}
             >{item.date}</Text>
-            {item.date ? icons[item.emotion] : null}
+            {item.date && item.date <= new Date().getDate() ? icons[item.emotion] : null}
           </Pressable>
         )}
         numColumns={7}

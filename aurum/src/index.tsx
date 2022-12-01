@@ -112,7 +112,7 @@ const Root = (props: any) => {
               fontSize: 22,
               fontWeight: 'bold',
             }}
-          >4GZZ</Text>
+          >GoldenChild</Text>
         </Pressable>
         <View
           style={{

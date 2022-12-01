@@ -19,7 +19,7 @@ const Logo = ({ size }: { size: number }) => {
               fontSize: size,
               fontFamily: 'Poppins-Bold',
             }}
-          >4GZZ</Text>
+          >GoldenChild</Text>
       </View>
     )
   }
