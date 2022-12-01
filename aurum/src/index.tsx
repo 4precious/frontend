@@ -1,5 +1,5 @@
 import { StyleSheet, SafeAreaView, Text, Button, Image, View, Pressable } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import MainCard from './components/MainCard'
 import { Bell, Calendar, User } from 'react-native-feather';
 import getTodayInString from './utils/getTodayInString';
@@ -16,6 +16,10 @@ import getQuestions from './utils/getQuestions';
 import loginWithCredentials from './utils/loginWithCredentials';
 import axios from 'axios';
 import uploadQuestion from './utils/uploadQuestion';
+import { Answer, Question } from './interfaces/text';
+import getAnswer from './utils/getAnswer';
+import getQuestion from './utils/getQuestion';
+import isLogin from './utils/isLogin';
 
 type ObjType = {
   [index: string]: any
@@ -30,16 +34,65 @@ type ObjType = {
   injury : <ChildSadSvg/>,
   sadness : <ChildSadSvg/>
  }
-
- const repemotion = 'sadness';
- 
  
 const Root = (props: any) => {
+  const [question, setQuestion] = useState<Question | null>(null);
+  const [answer, setAnswer] = useState<Answer | null>(null);
+  const [repemotion, setRepemotion] = useState<string>('default');
+  const [isLogined, setIsLogined] = useState<boolean>(false);
+
+  useEffect(() => {(async () => {
+    await loginWithCredentials('parent2@email.me', '1234567!');
+    setIsLogined(true);
+  })()},[]);
+
+  useEffect(() => {(async () => {
+    const questionData = await getQuestion(
+      'parent2@email.me',
+      new Date().toISOString().split('T')[0]
+    )
+    console.log(questionData)
+    if (!questionData || questionData?.content?.length === 0) {
+      console.warn('No question data')
+      return;
+    }
+    setQuestion(questionData);
+  })()}, [])
+
+  useEffect(() => {(async () => {
+    if (question) {
+      const answerData = await getAnswer(question.id)
+      if (!answerData) {
+        console.warn('No answer data')
+        return;
+      }
+      setAnswer(answerData)
+    }
+  })()}, [question])
+
   useEffect(() => {
-    loginWithCredentials('parent2@email.me', '1234567!')
-    getQuestions();
-    uploadQuestion('test question');
-  })
+    if (answer) {
+      const emotion: {
+        [emotion: string]: number,
+      } = {
+        angry : answer.result_anger ?? 0,
+        anxiety : answer.result_anxiety ?? 0,
+        happiness : answer.result_happiness ?? 0,
+        embarrassment : answer.result_embarrassment ?? 0,
+        injury : answer.result_injury ?? 0,
+        sadness : answer.result_sadness ?? 0,
+      }
+
+      let max = 0;
+      Object.keys(emotion).forEach((key) => {
+        if (emotion[key] > max) {
+          max = emotion[key];
+          setRepemotion(key);
+        }
+      })
+    }
+  }, [answer])
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{
@@ -59,7 +112,7 @@ const Root = (props: any) => {
               fontSize: 22,
               fontWeight: 'bold',
             }}
-          >4GZZ</Text>
+          >GoldenChild</Text>
         </Pressable>
         <View
           style={{
@@ -140,7 +193,9 @@ const Root = (props: any) => {
               style={{
                 fontSize: 16,
               }}
-            >질문 작성하기</Text>
+            >{
+              question ? '답변 확인하기' : '질문 작성하기'
+            }</Text>
           </Pressable>
         </MainCard>
       </View>
@@ -150,11 +205,12 @@ const Root = (props: any) => {
           alignItems: 'center',
         }}
       >
-        <Text
+        {
+          !question && <Text
           style={{
             fontSize: 16,
           }}
-        >오늘의 질문을 입력해주세요</Text>
+        >오늘의 질문을 입력해주세요</Text>}
       </View>
     </SafeAreaView>
   )

@@ -1,25 +1,38 @@
 import { SafeAreaView, StyleSheet, View, Text, Alert, Keyboard, Pressable, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import DateDisplay from '../../components/DateDisplay'
 import PrimaryButton from '../../components/PrimaryButton'
 import AnswerDisplay from '../Answer/AnswerDisplay'
 import QuestionDisplay from '../Answer/QuestionDisplay'
 import SentimentalAnalysisResulltDisplay from '../../components/SentimentalAnalysisResulltDisplay'
-
-//dummy (API 문서 보고 똑같이 변수 설정) 나중에 백엔드에서 가져오기!!
-const result_happiness = 0.226;
-const result_angry = 30.95;
-const result_sadness = 5.267;
-const result_anxiety = 55.204;
-const result_injury = 7.285;
-const result_embarrassment = 1.068;
+import uploadAnswer from '../../utils/uploadAnswer'
+import { Answer, Question } from '../../interfaces/text'
+import getQuestion from '../../utils/getQuestion'
+import getAnswer from '../../utils/getAnswer'
 
 const AnswerPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
-  const [question, setQuestion] = useState('Q. 오늘 학교 생활은 어땠어?')
-  const [answer, setAnswer] = useState('')
+  const [question, setQuestion] = useState<Question | null>(null)
+  const [answer, setAnswer] = useState<Answer | null>(null)
+
   const [editable, setEditable] = useState(true)
+
+  useEffect(() => {(async () => {
+    const questionData = await getQuestion(
+      'parent2@email.me',
+      new Date().toISOString().split('T')[0]
+    )
+    setQuestion(questionData)
+  })()}, [])
+
+  useEffect(() => {(async () => {
+    if (question) {
+      const answerData = await getAnswer(question.id)
+      setAnswer(answerData)
+      setEditable(false)
+    }
+  })()}, [question])
 
   const submit = () => {
     Alert.alert("답변 작성을 마칠까요?", "답변이 부모님께 전송됩니다.", [
@@ -29,9 +42,16 @@ const AnswerPage = ({ navigation }: any) => {
       },
       {
         text: "확인",
-        onPress: () => {
+        onPress: async () => {
           setEditable(false)
-          // navigation.navigate('Root')
+          if (question && answer) {
+            await uploadAnswer({
+              questionId: question.id,
+              content: answer.content,
+            })
+            console.log('uploaded');
+            navigation.navigate('Root')
+          }
         }
       }
     ])
@@ -59,17 +79,20 @@ const AnswerPage = ({ navigation }: any) => {
             paddingHorizontal: 36,
           }}
         >
-          <QuestionDisplay question={question}></QuestionDisplay>
+          <QuestionDisplay question={question?.content || ''}></QuestionDisplay>
           <AnswerDisplay
-            answer={answer}
+            answer={answer?.content || ''}
             editable={editable}
             typingNow={typingNow}
             onPress={() => editable ? setTypingNow(true) : null}
             onBlur={() => setTypingNow(false)}
-            onChangeText={(text: string) => setAnswer(text)}
+            onChangeText={(text: string) => setAnswer({
+              ...(answer ?? {} as any),
+              content: text,
+            })}
           />
           {
-            answer.length > 0 && editable &&
+            answer && answer.content.length > 0 && editable &&
             <PrimaryButton onPress={() => {
               submit()
               Keyboard.dismiss()
@@ -77,11 +100,14 @@ const AnswerPage = ({ navigation }: any) => {
           }
         </View>
         {
-          answer.length > 0 && !typingNow && !editable &&
+          answer && answer.content.length > 0 && !typingNow && !editable &&
           <SentimentalAnalysisResulltDisplay 
-            result_happiness={result_happiness} result_angry = {result_angry}
-            result_anxiety = {result_anxiety} result_embarrassment = {result_embarrassment}
-            result_injury = {result_injury} result_sadness = {result_sadness}
+            result_happiness={answer.result_happiness ?? 0}
+            result_sadness={answer.result_sadness ?? 0}
+            result_anxiety={answer.result_anxiety ?? 0}
+            result_angry={answer.result_anger ?? 0}
+            result_embarrassment={answer.result_embarrassment ?? 0}
+            result_injury={answer.result_injury ?? 0}
           />
         }
       </ScrollView>

@@ -3,9 +3,14 @@ import CONST from './const';
 import { Answer } from '../interfaces/text';
 
 const getAnswer = async (questionId: number) => {
-  const response = await fetchWithAuthentication<{data: Answer}>(`${CONST.API_URL}/texts/single/answer?question_id=${questionId}`);
+  try {
+    const response = await fetchWithAuthentication<{data: Answer}>(`${CONST.API_URL}/texts/single/answer?question_id=${questionId}`);
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 }
 
 export default getAnswer;

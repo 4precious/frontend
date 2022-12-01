@@ -1,5 +1,5 @@
 import { StyleSheet, SafeAreaView, Text, Button, Image, View, Pressable } from 'react-native'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import MainCard from './components/MainCard'
 import { Calendar, User } from 'react-native-feather';
 import getTodayInString from './utils/getTodayInString';
@@ -7,10 +7,22 @@ import NotificationBell from './components/NotificationBell';
 import LoveletterSvg from '../assets/icons/loveletter.svg';
 import LeavesSvg from '../assets/icons/leaves.svg';
 import VectorSvg from '../assets/icons/vector412.svg';
+import { Question } from './interfaces/text';
+import getQuestion from './utils/getQuestion';
 
 const ChildRoot = (props: any) => {
-  const [question, setQuestion] = useState("오늘 학교 생활은 어땠어?")
+  const [question, setQuestion] = useState<Question | null>(null)
   //버튼 눌러야해서 일단 질문 있는거로 가정, true로 놓고 함
+
+  useEffect(() => {(async () => {
+    const question = await getQuestion(
+      'parent2@email.me',
+      new Date().toISOString().split('T')[0]
+    )
+    if (question) {
+      setQuestion(question)
+    }
+  })()}, [])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,7 +42,7 @@ const ChildRoot = (props: any) => {
               fontSize: 22,
               fontWeight: 'bold',
             }}
-          >4GZZ</Text>
+          >GoldenChild</Text>
         </Pressable>
         <View
           style={{
@@ -127,13 +139,13 @@ const ChildRoot = (props: any) => {
                     fontWeight: '500',
                     padding: 16,
                     minHeight:48,
-                    alignItems: question.length > 0 ? 'flex-start' : 'center',
-                    justifyContent: question.length > 0 ? 'flex-start' : 'center',
+                    alignItems: question.content.length > 0 ? 'flex-start' : 'center',
+                    justifyContent: question.content.length > 0 ? 'flex-start' : 'center',
                   }}
                   ellipsizeMode='tail'
                   numberOfLines={2}
                 >
-                  {question}
+                  {question.content}
                 </Text>
                 <VectorSvg/>
               </View>

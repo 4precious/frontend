@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import { Question } from '../../interfaces/text'
 
 const QuestionDisplay = ({ question }: { question: string }) => {
   return (

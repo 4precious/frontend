@@ -7,24 +7,63 @@ import AnswerDisplay from './AnswerDisplay'
 import SentimentalAnalysisResulltDisplay from '../../components/SentimentalAnalysisResulltDisplay'
 import QuestionDisplay from './QuestionDisplay'
 import YesterdayDisplay from './YesterdayDisplay'
+import { Answer, Question } from '../../interfaces/text'
+import getQuestion from '../../utils/getQuestion'
+import getAnswer from '../../utils/getAnswer'
+import uploadQuestion from '../../utils/uploadQuestion'
  
-//dummy (API 문서 보고 똑같이 변수 설정) 나중에 백엔드에서 가져오기!!
-const result_happiness = 0.226;
-const result_angry = 30.95;
-const result_sadness = 5.267;
-const result_anxiety = 55.204;
-const result_injury = 7.285;
-const result_embarrassment = 1.068;
-
 const QuestionPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
-  const [question, setQuestion] = useState('')
+  const [question, setQuestion] = useState<Question | null>(null)
   const [editable, setEditable] = useState(true)
-  const [answer, setAnswer] = useState('요즘 공부에 집중이 안 돼서 너무 속상해. 저번 시험에서도 내 생각보다 낮은 점수를 받아서 기분이 좋지 않았어. 자꾸 그때 생각이 나서, 이번에도 시험 결과가 안 좋을까봐 너무 걱정돼. 이제 또 시험기간인데, 자꾸만 초조해지고 불안해. 내가 잘 할 수 있을지 모르겠어. 그래도 최선을 다 해볼게.')
+  const [answer, setAnswer] = useState<Answer | null>(null)
   // const [answer, setAnswer] = useState('')
   const [btninfo, setBtninfo] = useState('') //대표 감정에 따른 버튼 내용
   const [repemotion,setRepemotion] = useState('')//대표 감정
   const [repper, setRepper] = useState(0) //대표 감정의 퍼센트
+  const [emotions, setEmotions] = useState({
+    happiness: 0,
+    angry: 0,
+    sadness: 0,
+    anxiety: 0,
+    injury: 0,
+    embarrassment: 0,
+  }) //감정들
+
+  useEffect(() => {(async () => {
+    const questionData = await getQuestion(
+      'parent2@email.me',
+      new Date().toISOString().split('T')[0]
+    )
+    if (questionData) {
+      setQuestion(questionData)
+      setEditable(false)
+    }
+  })()}, [])
+
+  useEffect(() => {(async () => {
+    if (question) {
+      const answerData = await getAnswer(question.id)
+      if (answerData) {
+        setAnswer(answerData)
+      }
+    }
+  })()}, [question])
+
+  useEffect(() => {
+    if (answer) {
+      console.log(answer)
+      setEmotions({
+        happiness: answer.result_happiness ?? -1,
+        angry: answer.result_anger ?? -1,
+        sadness: answer.result_sadness ?? -1,
+        anxiety: answer.result_anxiety ?? -1,
+        injury: answer.result_injury ?? -1,
+        embarrassment: answer.result_embarrassment ?? -1,
+      })
+    }
+  }, [answer])
+
 
   type ObjType = {
     [index: string]: string
@@ -41,42 +80,27 @@ const QuestionPage = ({ navigation }: any) => {
     'injury':'상처받은 우리 아이, 육아 코칭 살펴보기',//상처
   }
   
-  const setButtonInfo=(repemotion:any) =>{
-    useEffect(()=>{
-      for(const emo in buttonInfo){
-        if (repemotion === emo){
-          setBtninfo(buttonInfo[emo])
-        }
+  useEffect(() => {
+    for(const emo in buttonInfo){
+      if (repemotion === emo){
+        setBtninfo(buttonInfo[emo])
       }
-    },[repemotion]);    
-  }
-  setButtonInfo(repemotion) //기본값
+    }
+  }, [repemotion, buttonInfo])
   
-  const SelectRepEmotion = () =>{
-    const result = {
-      angry: result_angry,
-      anxiety: result_anxiety,
-      embarrassment: result_embarrassment,
-      happiness: result_happiness,
-      injury:result_injury,
-      sadness:result_sadness
-    };
-
-      const sorted =Object.entries(result).sort((a, b) => b[1] - a[1]);
-      var topemotion:any = []
-      var toppercent:any = []
-
+  useEffect(() => {
+    const sorted = Object.entries(emotions).sort((a, b) => b[1] - a[1]);
+    let topemotion: any = []
+    let toppercent: any = []
+  
     for(let element of sorted) {
       topemotion.push(element[0])
       toppercent.push(element[1])
     }
-    useEffect(()=>{
-      setRepemotion(topemotion[0])
-      setRepper(toppercent[0])
-    },[]);
-  }
 
-  SelectRepEmotion()
+    setRepemotion(topemotion[0])
+    setRepper(toppercent[0])
+  }, [emotions])
 
   const submit = () => {
     Alert.alert("질문 작성을 마칠까요?", "질문이 아이에게 전송됩니다.", [
@@ -88,6 +112,7 @@ const QuestionPage = ({ navigation }: any) => {
         text: "확인",
         onPress: () => {
           setEditable(false)
+          uploadQuestion(question?.content || '')
           // navigation.navigate('Root')
         }
       }
@@ -117,15 +142,15 @@ const QuestionPage = ({ navigation }: any) => {
           }}
         >
           <QuestionDisplay
-            question={question}
+            question={question?.content || ''}
             editable={editable}
             typingNow={typingNow}
             onPress={() => editable ? setTypingNow(true) : null}
             onBlur={() => setTypingNow(false)}
-            onChangeText={(text: string) => setQuestion(text)}
+            onChangeText={(text: string) => setQuestion({ ...(question ?? {} as any), content: text })}
           />
           {
-            question.length > 0 && editable &&
+            question && question.content.length > 0 && editable &&
             <PrimaryButton onPress={() => {
               submit()
               Keyboard.dismiss()
@@ -133,23 +158,26 @@ const QuestionPage = ({ navigation }: any) => {
           }
         </View>
         {
-          question.length > 0 && !typingNow && !editable &&
-          <AnswerDisplay answer={answer} />
+          question && question.content.length > 0 && !typingNow && !editable &&
+          <AnswerDisplay answer={answer?.content || ''} />
         }
         {
-          question.length > 0 && !typingNow && !editable && answer.length > 0 &&
+          question && question.content.length > 0 && answer && answer.content.length > 0 &&
           <SentimentalAnalysisResulltDisplay 
-            result_happiness={result_happiness} result_angry = {result_angry}
-            result_anxiety = {result_anxiety} result_embarrassment = {result_embarrassment}
-            result_injury = {result_injury} result_sadness = {result_sadness}
+            result_happiness = {answer.result_happiness ?? 0}
+            result_angry = {answer.result_anger ?? 0}
+            result_anxiety = {answer.result_anxiety ?? 0}
+            result_embarrassment = {answer.result_embarrassment ?? 0}
+            result_injury = {answer.result_injury ?? 0}
+            result_sadness = {answer.result_sadness ?? 0}
           />
         }
         {
-          question.length > 0 && !typingNow && !editable && answer.length > 0 &&
+          question && question.content.length > 0 && !typingNow && !editable && answer && answer.content.length > 0 &&
           <YesterdayDisplay repemotion = {repemotion} repper = {repper}/>
         }
         {
-          question.length > 0 && !typingNow && !editable && answer.length > 0 &&
+          question && question.content.length > 0 && !typingNow && !editable && answer && answer.content.length > 0 &&
           <View
             style={{
               marginHorizontal: 36,
