@@ -9,18 +9,18 @@ import QuestionDisplay from './QuestionDisplay'
 import YesterdayDisplay from './YesterdayDisplay'
  
 //dummy (API 문서 보고 똑같이 변수 설정) 나중에 백엔드에서 가져오기!!
-const result_happiness = 0.929042;
-const result_angry = 0.1534;
-const result_sadness = 0.234535;
-const result_anxiety = 0.51234;
-const result_injury = 0.33445;
-const result_embarrassment = 0.65456;
+const result_happiness = 0.226;
+const result_angry = 30.95;
+const result_sadness = 5.267;
+const result_anxiety = 55.204;
+const result_injury = 7.285;
+const result_embarrassment = 1.068;
 
 const QuestionPage = ({ navigation }: any) => {
   const [typingNow, setTypingNow] = useState(false)
   const [question, setQuestion] = useState('')
   const [editable, setEditable] = useState(true)
-  const [answer, setAnswer] = useState('lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies tincidunt, nunc nisl tincidunt nunc, eget aliquam nisl nisl sit amet nunc.')
+  const [answer, setAnswer] = useState('요즘 공부에 집중이 안 돼서 너무 속상해. 저번 시험에서도 내 생각보다 낮은 점수를 받아서 기분이 좋지 않았어. 자꾸 그때 생각이 나서, 이번에도 시험 결과가 안 좋을까봐 너무 걱정돼. 이제 또 시험기간인데, 자꾸만 초조해지고 불안해. 내가 잘 할 수 있을지 모르겠어. 그래도 최선을 다 해볼게.')
   // const [answer, setAnswer] = useState('')
   const [btninfo, setBtninfo] = useState('') //대표 감정에 따른 버튼 내용
   const [repemotion,setRepemotion] = useState('')//대표 감정
