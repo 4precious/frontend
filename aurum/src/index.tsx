@@ -20,6 +20,7 @@ import { Answer, Question } from './interfaces/text';
 import getAnswer from './utils/getAnswer';
 import getQuestion from './utils/getQuestion';
 import isLogin from './utils/isLogin';
+import getRepresentEmotion from '../src/utils/getRepresentEmotion'
 
 type ObjType = {
   [index: string]: any
@@ -28,7 +29,7 @@ type ObjType = {
  const icons : ObjType = {
   default: <ChildDefaultSvg/>,//기본값
   angry : <ChildAngrySvg/>,
-  anxiety : <ChildDefaultSvg/>,//사진 없음
+  anxiety : <ChildSadSvg/>,//사진 없음
   happiness :<ChildHappySvg/>,
   embarrassment : <ChildDefaultSvg/>,//사진 없음
   injury : <ChildSadSvg/>,
@@ -92,6 +93,11 @@ const Root = (props: any) => {
       })
     }
   }, [answer])
+
+  useEffect(()=>{
+    const repemo = getRepresentEmotion(answer)
+    setRepemotion(repemo)
+  },[])
 
   return (
     <SafeAreaView style={styles.container}>
